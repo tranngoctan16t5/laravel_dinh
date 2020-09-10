@@ -21,4 +21,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/permission-denied','Admin/AdminController@permissionDenied')->name('nopermission');
+Route::get('/permission-denied','Admin\AdminController@permissionDenied')->name('nopermission');
