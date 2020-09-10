@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+include 'route_admin.php';
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-include 'route_admin.php';
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/permission-denied','AdminController@permissionDenied')->name('nopermission');

@@ -13,11 +13,13 @@ class Subject extends Model
         'image',
     ];
 
-    public function courses(){
+    public function courses()
+    {
         return $this->belongsToMany(Course::class,'course_subject','subject_id','course_id');
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany(User::class,'user_subject','subject_id','user_id');
     }
 }
