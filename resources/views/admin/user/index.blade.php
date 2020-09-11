@@ -43,6 +43,7 @@
                 @endforeach
             </tbody>
         </table>
+        {!! $users !!}
         </div>
         <!-- /.box-body -->
     </div>

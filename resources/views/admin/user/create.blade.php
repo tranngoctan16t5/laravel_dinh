@@ -87,11 +87,11 @@
 
 
 
-         {{--    <select class="form-control">
+            <select name="role" class="form-control">
                 @foreach ($roles as $role)
-                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    <option  value="{{ $role->id }}">{{ $role->name }}</option>
                 @endforeach
-            </select> --}}
+            </select>
 
 
         </div>

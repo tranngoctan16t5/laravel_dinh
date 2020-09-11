@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Hash;
+use DB;
+use Carbon\Carbon;
+
 
 
 
@@ -27,7 +30,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->user->all();
+        $users = $this->user->paginate(5);
         return view('admin.user.index',compact('users'));
     }
 
@@ -50,7 +53,9 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        // dd($request);
+
+      try {
+        DB::beginTransaction();
         $data = array();
         $data['username'] = $request->username;
         $data['phone'] = $request->phone;
@@ -72,11 +77,18 @@ class UserController extends Controller
             $success = $image->move($upload_patch, $image_full_name);
             $data['avatar'] =  $image_url;
         }
-
-        // $data['avatar'] = 'user';
-
-        $this->user->create($data);
+        $newUser = $this->user->create($data);
+        DB::table('role_user')->insert([
+            'user_id' => $newUser->id ,
+            'role_id' => $request->role,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::commit();
         return redirect()->route('users.index');
+      } catch (Exception $e) {
+        DB::rollBack();
+      }
     }
 
     /**
