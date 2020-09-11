@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => ['required', 'string', 'max:255'],
+            'username' => ['required'],
             'phone' => ['required'],
             'gender' => ['required'],
             'email' => ['required'],
@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
             'address' => ['required'],
             'university' => ['required'],
             'birthday' => ['required'],
-            // 'avatar' => ['required'],
+            'avatar' => ['required'],
         ];
     }
 }

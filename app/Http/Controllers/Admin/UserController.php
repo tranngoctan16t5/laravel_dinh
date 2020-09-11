@@ -50,7 +50,9 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        dd($request);
+
+        $
+
         // $request->$user->create([
         //     'username' => $request->username,
         //     'phone' => $request->phone,
