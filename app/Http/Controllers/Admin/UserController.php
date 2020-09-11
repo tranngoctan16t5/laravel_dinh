@@ -50,20 +50,31 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $data = array();
+        $data['username'] = $request->username;
+        $data['phone'] = $request->phone;
+        $data['gender'] = $request->gender;
+        $data['email'] = $request->email;
+        $data['address'] = $request->address;
+        $data['university'] = $request->university;
+        $data['birthday'] = $request->birthday;
+        $data['password'] = Hash::make($request->password);
 
-        $
+        $image = $request->file('avatar');
 
-        // $request->$user->create([
-        //     'username' => $request->username,
-        //     'phone' => $request->phone,
-        //     'gender' => $request->gender,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        //     'university' => $request->university,
-        //     'birthday' => $request->birthday,
-        //     'avatar' => $request->avatar,
-        // ]);
-        // return redirect()->route('task.index');
+        if ($image) {
+            $image_name = date('dmy_H_s_i');
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_patch = 'public/media/';
+            $image_url = $upload_patch . $image_full_name;
+            $success = $image->move($upload_patch, $image_full_name);
+
+            $data['avatar'] =  $image_url;
+        }
+
+        $this->user->create($data);
+        return redirect()->route('users.index');
     }
 
     /**
