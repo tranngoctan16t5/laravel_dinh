@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Hash;
+
+
 
 class UserController extends Controller
 {
+    private $user;
+    private $role;
+
+    public function __construct(User $user,Role $role) {
+        $this->user = $user;
+        $this->role = $role;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = $this->user->all();
         return view('admin.user.index',compact('users'));
     }
 
@@ -25,7 +38,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = $this->role->all();
+        return view('admin.user.create',compact('roles'));
     }
 
     /**
@@ -34,9 +48,20 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        dd($request);
+        // $request->$user->create([
+        //     'username' => $request->username,
+        //     'phone' => $request->phone,
+        //     'gender' => $request->gender,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'university' => $request->university,
+        //     'birthday' => $request->birthday,
+        //     'avatar' => $request->avatar,
+        // ]);
+        // return redirect()->route('task.index');
     }
 
     /**
