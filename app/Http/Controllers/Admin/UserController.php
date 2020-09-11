@@ -50,6 +50,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        // dd($request);
         $data = array();
         $data['username'] = $request->username;
         $data['phone'] = $request->phone;
@@ -69,9 +70,10 @@ class UserController extends Controller
             $upload_patch = 'public/media/';
             $image_url = $upload_patch . $image_full_name;
             $success = $image->move($upload_patch, $image_full_name);
-
             $data['avatar'] =  $image_url;
         }
+
+        // $data['avatar'] = 'user';
 
         $this->user->create($data);
         return redirect()->route('users.index');

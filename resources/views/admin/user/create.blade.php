@@ -6,7 +6,7 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form role="form" method="POST" enctype="mutipart/form-data" action="{{ route('users.store') }}"  >
+    <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('users.store') }}"  >
         @csrf
         <div class="box-body">
             <div class="form-group has-error">
