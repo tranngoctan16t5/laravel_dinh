@@ -65,9 +65,7 @@ class UserController extends Controller
         $data['university'] = $request->university;
         $data['birthday'] = $request->birthday;
         $data['password'] = Hash::make($request->password);
-
         $image = $request->file('avatar');
-
         if ($image) {
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
@@ -77,13 +75,8 @@ class UserController extends Controller
             $success = $image->move($upload_patch, $image_full_name);
             $data['avatar'] =  $image_url;
         }
-        $newUser = $this->user->create($data);
-        DB::table('role_user')->insert([
-            'user_id' => $newUser->id ,
-            'role_id' => $request->role,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        $user = $this->user->create($data);
+        $user->roles()->attach($request->role);
         DB::commit();
         return redirect()->route('users.index');
       } catch (Exception $e) {
@@ -99,7 +92,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->user->findOrFail($id);
+        $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
+        return view('admin.user.show',compact('user','roleOfUser'));
     }
 
     /**
@@ -126,10 +121,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
         DB::beginTransaction();
         $data = array();
-        $data['id'] = $id;
         $data['username'] = $request->username;
         $data['phone'] = $request->phone;
         $data['gender'] = $request->gender;
@@ -138,10 +131,8 @@ class UserController extends Controller
         $data['university'] = $request->university;
         $data['birthday'] = $request->birthday;
         $data['password'] = Hash::make($request->password);
-
         $image = $request->file('avatar');
         $old_avatar = $request->old_avatar;
-
         if ($image) {
             unlink($old_avatar);
             $image_name = date('dmy_H_s_i');
@@ -152,17 +143,9 @@ class UserController extends Controller
             $success = $image->move($upload_patch, $image_full_name);
             $data['avatar'] =  $image_url;
         }
-
-        $userEdit = $this->user->where('id',$id)->update($data);
-
-        DB::table('role_user')->where('user_id',$id)->delete();
-
-        DB::table('role_user')->insert([
-            'user_id' => $id ,
-            'role_id' => $request->role,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        $this->user->where('id',$id)->update($data);
+        $user = $this->user->find($id);
+        $user->roles()->sync($request->role);
         DB::commit();
         return redirect()->route('users.index');
       } catch (Exception $e) {
@@ -188,6 +171,5 @@ class UserController extends Controller
         } catch (Exception $e) {
              DB::rollBack();
         }
-
     }
 }
