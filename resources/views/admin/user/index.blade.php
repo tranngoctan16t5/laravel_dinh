@@ -16,6 +16,11 @@
     <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
+         @if (session('success'))
+         <div class="alert alert-success">
+            {{ session('success') }}
+         </div>
+      @endif
         <table class="table table-hover">
             <tbody>
                 <tr>
@@ -49,7 +54,6 @@
                 @endforeach
             </tbody>
         </table>
-        {!! $users !!}
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
