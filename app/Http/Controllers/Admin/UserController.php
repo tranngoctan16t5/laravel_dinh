@@ -9,6 +9,7 @@ use App\Http\Requests\UserRequest;
 use Hash;
 use DB;
 use Carbon\Carbon;
+use Session;
 
 
 
@@ -77,6 +78,7 @@ class UserController extends Controller
         }
         $user = $this->user->create($data);
         $user->roles()->attach($request->role);
+        Session::put('message','Create user successfully !');
         DB::commit();
         return redirect()->route('users.index');
       } catch (Exception $e) {
