@@ -166,8 +166,8 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             $user = $this->user->findOrFail($id);
+            $user->delete($id);
             $user->roles()->detach();
-            $user->delete();
             DB::commit();
             return redirect()->back();
         } catch (Exception $e) {
