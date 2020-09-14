@@ -10,8 +10,6 @@ use Hash;
 use DB;
 use Carbon\Carbon;
 
-
-
 class UserController extends Controller
 {
     private $user;
@@ -52,36 +50,35 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        // dd($request->id);
-        $image = $request->avatar;
-        if($image){
+      try {
+        DB::beginTransaction();
+        $data = array();
+        $data['username'] = $request->username;
+        $data['phone'] = $request->phone;
+        $data['gender'] = $request->gender;
+        $data['email'] = $request->email;
+        $data['address'] = $request->address;
+        $data['university'] = $request->university;
+        $data['birthday'] = $request->birthday;
+        $data['password'] = Hash::make($request->password);
+        $image = $request->file('avatar');
+        if ($image) {
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
             $upload_patch = 'public/media/';
             $image_full_name = $image_name . '.' . $ext;
             $image_url = $upload_patch . $image_full_name;
             $success = $image->move($upload_patch, $image_full_name);
+
+            $data['avatar'] =  $image_url;
         }
-        $id = $this->user->create([
-            'username' => $request->username,
-            'phone' => $request->phone,
-            'gender' => $request->gender,
-            'email' => $request->email,
-            'address' => $request->address,
-            'university' => $request->university,
-            'birthday' => $request->birthday,
-            'password' => Hash::make($request->password),
-            'avatar' => $image_url,
-        ])->id;
-        DB::table('role_user')->insert([
-            'user_id' => $id,
-            'role_id' => $request->role_id,
-            'created_at' => Carbon::now(),
-            'updated_at' =>Carbon::now(),
-         ]);
-
-
+        $user = $this->user->create($data);
+        $user->roles()->attach($request->role);
+        DB::commit();
         return redirect()->route('users.index');
+      } catch (Exception $e) {
+        DB::rollBack();
+      }
     }
 
     /**
@@ -92,7 +89,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->user->findOrFail($id);
+        $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
+        return view('admin.user.show',compact('user','roleOfUser'));
     }
 
     /**
@@ -103,10 +102,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roleSelected = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
+
+        $user = $this->user->findOrFail($id);
         $roles = $this->role->all();
-        $user = $this->user->find($id);
-        return view('admin.user.edit',compact('user','roles','roleSelected'));
+        $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
+        return view('admin.user.edit',compact('user','roles','roleOfUser'));
 
     }
 
@@ -119,36 +119,38 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->avatar);
-        $userUpdate = $this->user->findOrFail($id);
-        $image = $request->avatar;
-        if($image){
+
+        try {
+        DB::beginTransaction();
+        $data = array();
+        $data['username'] = $request->username;
+        $data['phone'] = $request->phone;
+        $data['gender'] = $request->gender;
+        $data['email'] = $request->email;
+        $data['address'] = $request->address;
+        $data['university'] = $request->university;
+        $data['birthday'] = $request->birthday;
+        $data['password'] = Hash::make($request->password);
+        $image = $request->file('avatar');
+        $old_avatar = $request->old_avatar;
+        if ($image) {
+            unlink($old_avatar);
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
-            $upload_patch = 'public/media/';
             $image_full_name = $image_name . '.' . $ext;
+            $upload_patch = 'public/media/';
             $image_url = $upload_patch . $image_full_name;
             $success = $image->move($upload_patch, $image_full_name);
-
-             $userUpdate->update([
-            'username' => $request->username,
-            'phone' => $request->phone,
-            'gender' => $request->gender,
-            'email' => $request->email,
-            'address' => $request->address,
-            'university' => $request->university,
-            'birthday' => $request->birthday,
-            'password' => Hash::make($request->password),
-            'avatar' => $image_url,
-        ]);
-        DB::table('role_user')->where('user_id',$id)->update([
-            'role_id' => $request->role_id,
-         ]);
-
-
-        return redirect()->route('users.index');
+            $data['avatar'] =  $image_url;
         }
-
+        $this->user->where('id',$id)->update($data);
+        $user = $this->user->find($id);
+        $user->roles()->sync($request->role);
+        DB::commit();
+        return redirect()->route('users.index');
+      } catch (Exception $e) {
+        DB::rollBack();
+      }
     }
 
     /**
@@ -159,9 +161,15 @@ class UserController extends Controller
      */
     public function destroy($user)
     {
-        $user = $this->user->findOrFail($user);
-        $user->delete();
-        return redirect()->back();
-
+        try {
+            DB::beginTransaction();
+            $user = $this->user->findOrFail($id);
+            $user->delete($id);
+            $user->roles()->detach();
+            DB::commit();
+            return redirect()->back();
+        } catch (Exception $e) {
+             DB::rollBack();
+        }
     }
 }

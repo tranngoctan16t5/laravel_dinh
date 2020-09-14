@@ -37,10 +37,11 @@
                     <td>
                         <a href="{{ route('users.show',$user->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle"></i>Detail</a>
                         <a href="{{ route('users.edit',$user->id)}}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i>Edit</a>
-                        <form id="my_form" action="{{ route('users.destroy',$user->id)}}" method="POST">
+                        <form action="{{ route('users.destroy',$user->id)}}" id="delete_form" method="POST">
                             @method('delete')
                             @csrf
-                               <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                            <button type="submit">Delete</button>
+                             {{-- <a href="javascript:$('#delete_form').submit();" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a> --}}
                         </form>
 
                     </td>
@@ -48,6 +49,7 @@
                 @endforeach
             </tbody>
         </table>
+        {!! $users !!}
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

@@ -448,7 +448,7 @@
             autoclose: true,
             todayHighlight: true,
             rtl: true,
-            orientation: "auto",
+            orientation: "bottom",
 
             });
       </script>

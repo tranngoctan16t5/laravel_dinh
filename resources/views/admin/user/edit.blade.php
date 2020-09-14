@@ -2,24 +2,25 @@
 @section('content')
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Quick Example</h3>
+        <h3 class="box-title">Edit User</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('users.store') }}"  >
+    <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('users.update',$user->id) }}"  >
         @csrf
+        @method('PUT')
         <div class="box-body">
+            <input type="hidden" name="id">
             <div class="form-group ">
-
                 <label >Username</label>
-                <input type="text" class="form-control" value="{{ old('username') }}" name="username" placeholder="Enter username">
+                <input type="text" class="form-control"  name="username" value="{{ $user->username }}" placeholder="Enter username">
                 @error('username')
                     <div class="text-danger">{{ $errors->first('username') }}</div>
                 @enderror
             </div>
             <div class="form-group ">
                 <label for="exampleInputEmail1">Phone</label>
-                <input type="text" class="form-control" value="{{ old('phone') }}" id="exampleInputEmail1" name="phone" placeholder="Enter phone">
+                <input type="text" class="form-control" value="{{ $user->phone }}" id="exampleInputEmail1" name="phone" placeholder="Enter phone">
                 @error('phone')
                     <div class="text-danger">{{ $errors->first('phone') }}</div>
                 @enderror
@@ -27,9 +28,10 @@
             <div class="form-group ">
                 <label>Gender</label>
                 <select class="form-control" name="gender">
+
                     <option value="">--Choose--</option>
-                    <option {{ old('gender') ? 'selected' : '' }} value="1">Male</option>
-                    <option {{ old('gender') ? '' : 'selected' }}  value="0">Female</option>
+                    <option {{ $user->gender == 1 ? 'selected' : "" }} value="1">Male</option>
+                    <option {{ $user->gender == 0? 'selected' : "" }} value="0">Female</option>
                 </select>
                 @error('gender')
                     <div class="text-danger">{{ $errors->first('gender') }}</div>
@@ -37,28 +39,28 @@
             </div>
             <div class="form-group ">
                 <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" value="{{ old('email') }}" id="exampleInputEmail1" name="email" placeholder="Enter email">
+                <input type="email" value="{{ $user->email }}" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter email">
                 @error('email')
                     <div class="text-danger">{{ $errors->first('email') }}</div>
                 @enderror
             </div>
             <div class="form-group ">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" id="inputError" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" id="inputError" name="password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
                 @error('password')
                     <div class="text-danger">{{ $errors->first('password') }}</div>
                 @enderror
             </div>
             <div class="form-group ">
                 <label for="exampleInputPassword1">University</label>
-                <input type="text" name="university" value="{{ old('university') }}" class="form-control" id="exampleInputPassword1" placeholder="university">
+                <input type="text" name="university" value="{{ $user->university }}" class="form-control" id="exampleInputPassword1" placeholder="university">
                 @error('university')
                     <div class="text-danger">{{ $errors->first('university') }}</div>
                 @enderror
             </div>
              <div class="form-group ">
                 <label for="exampleInputPassword1">Address</label>
-                <input type="text" name="address" value="{{ old('address') }}" class="form-control" id="exampleInputPassword1" placeholder="address">
+                <input type="text" name="address" value="{{ $user->address }}" class="form-control" id="exampleInputPassword1" placeholder="address">
                 @error('university')
                     <div class="text-danger">{{ $errors->first('address') }}</div>
                 @enderror
@@ -69,7 +71,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" value="{{ old('birthday') }}" id="datepicker" name="birthday">
+                    <input value="{{ date('Y/m/d', strtotime($user->birthday)) }}"  type="text" class="form-control pull-right" id="datepicker" name="birthday">
                 </div>
                 @error('birthday')
                     <div class="text-danger">{{ $errors->first('birthday') }}</div>
@@ -78,22 +80,38 @@
             </div>
             <div class="form-group ">
                 <label for="exampleInputFile">Avatar</label>
-                <input type="file" name="avatar" value="{{ old('avatar') }}" id="exampleInputFile">
+                <input type="file" name="avatar" id="exampleInputFile">
                 <p class="help-block">Example block-level help text here.</p>
                 @error('avatar')
                     <div class="text-danger">{{ $errors->first('avatar') }}</div>
                 @enderror
             </div>
+
+            <div class="form-group ">
+                <label for="exampleInputFile">Old Avatar</label>
+                <img width="200px" height="200px" src="{{URL::to($user->avatar)}}" alt="">
+                <input type="hidden" name="old_avatar" value="{{$user->avatar}}">
+            </div>
+
+
+
+
             <select name="role" class="form-control">
                 @foreach ($roles as $role)
-                    <option  value="{{ $role->id }}">{{ $role->name }}</option>
+                    <option {{ $roleOfUser->contains($role->id) ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
                 @endforeach
             </select>
+
+
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
         </div>
+
+
+
     </form>
 </div>
 @endsection
