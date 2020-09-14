@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Hash;
+use DB;
+use Carbon\Carbon;
 
 
 
@@ -27,7 +29,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->user->all();
+        $users = $this->user->paginate(5);
         return view('admin.user.index',compact('users'));
     }
 
@@ -50,30 +52,35 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $data = array();
-        $data['username'] = $request->username;
-        $data['phone'] = $request->phone;
-        $data['gender'] = $request->gender;
-        $data['email'] = $request->email;
-        $data['address'] = $request->address;
-        $data['university'] = $request->university;
-        $data['birthday'] = $request->birthday;
-        $data['password'] = Hash::make($request->password);
-
-        $image = $request->file('avatar');
-
-        if ($image) {
+        // dd($request->id);
+        $image = $request->avatar;
+        if($image){
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name . '.' . $ext;
             $upload_patch = 'public/media/';
+            $image_full_name = $image_name . '.' . $ext;
             $image_url = $upload_patch . $image_full_name;
             $success = $image->move($upload_patch, $image_full_name);
-
-            $data['avatar'] =  $image_url;
         }
+        $id = $this->user->create([
+            'username' => $request->username,
+            'phone' => $request->phone,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'address' => $request->address,
+            'university' => $request->university,
+            'birthday' => $request->birthday,
+            'password' => Hash::make($request->password),
+            'avatar' => $image_url,
+        ])->id;
+        DB::table('role_user')->insert([
+            'user_id' => $id,
+            'role_id' => $request->role_id,
+            'created_at' => Carbon::now(),
+            'updated_at' =>Carbon::now(),
+         ]);
 
-        $this->user->create($data);
+
         return redirect()->route('users.index');
     }
 
@@ -96,7 +103,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roleSelected = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
+        $roles = $this->role->all();
+        $user = $this->user->find($id);
+        return view('admin.user.edit',compact('user','roles','roleSelected'));
+
     }
 
     /**
@@ -108,7 +119,36 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->avatar);
+        $userUpdate = $this->user->findOrFail($id);
+        $image = $request->avatar;
+        if($image){
+            $image_name = date('dmy_H_s_i');
+            $ext = strtolower($image->getClientOriginalExtension());
+            $upload_patch = 'public/media/';
+            $image_full_name = $image_name . '.' . $ext;
+            $image_url = $upload_patch . $image_full_name;
+            $success = $image->move($upload_patch, $image_full_name);
+
+             $userUpdate->update([
+            'username' => $request->username,
+            'phone' => $request->phone,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'address' => $request->address,
+            'university' => $request->university,
+            'birthday' => $request->birthday,
+            'password' => Hash::make($request->password),
+            'avatar' => $image_url,
+        ]);
+        DB::table('role_user')->where('user_id',$id)->update([
+            'role_id' => $request->role_id,
+         ]);
+
+
+        return redirect()->route('users.index');
+        }
+
     }
 
     /**
@@ -117,8 +157,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user)
     {
-        //
+        $user = $this->user->findOrFail($user);
+        $user->delete();
+        return redirect()->back();
+
     }
 }

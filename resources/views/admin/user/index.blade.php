@@ -37,7 +37,12 @@
                     <td>
                         <a href="{{ route('users.show',$user->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle"></i>Detail</a>
                         <a href="{{ route('users.edit',$user->id)}}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i>Edit</a>
-                        <a href="{{ route('users.destroy',$user->id)}}" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                        <form id="my_form" action="{{ route('users.destroy',$user->id)}}" method="POST">
+                            @method('delete')
+                            @csrf
+                               <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                        </form>
+
                     </td>
                 </tr>
                 @endforeach
@@ -45,5 +50,8 @@
         </table>
         </div>
         <!-- /.box-body -->
+        <div class="box-footer">
+            {{ $users }}
+        </div>
     </div>
     @endsection

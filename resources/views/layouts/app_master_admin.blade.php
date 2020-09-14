@@ -442,7 +442,7 @@
       </script>
       <script type="text/javascript">
             $( "#datepicker" ).datepicker({
-            format: "mm/dd/yyyy",
+            format: "yyyy-mm-dd",
             weekStart: 0,
             calendarWeeks: true,
             autoclose: true,
