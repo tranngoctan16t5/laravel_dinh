@@ -40,8 +40,8 @@
                         <form action="{{ route('users.destroy',$user->id)}}" id="delete_form" method="POST">
                             @method('delete')
                             @csrf
-                            {{-- <button type="submit">Delete</button> --}}
-                             <a href="javascript:$('#delete_form').submit();" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                            <button type="submit">Delete</button>
+                             {{-- <a href="javascript:$('#delete_form').submit();" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a> --}}
                         </form>
 
                     </td>
