@@ -10,6 +10,7 @@
         @csrf
         <div class="box-body">
             <div class="form-group ">
+
                 <label >Username</label>
                 <input type="text" class="form-control" value="{{ old('username') }}" name="username" placeholder="Enter username">
                 @error('username')
@@ -83,17 +84,11 @@
                     <div class="text-danger">{{ $errors->first('avatar') }}</div>
                 @enderror
             </div>
-
-
-
-
             <select name="role" class="form-control">
                 @foreach ($roles as $role)
                     <option  value="{{ $role->id }}">{{ $role->name }}</option>
                 @endforeach
             </select>
-
-
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

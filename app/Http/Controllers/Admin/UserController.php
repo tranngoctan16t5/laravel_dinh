@@ -11,9 +11,6 @@ use DB;
 use Carbon\Carbon;
 use Session;
 
-
-
-
 class UserController extends Controller
 {
     private $user;
@@ -54,7 +51,6 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-
       try {
         DB::beginTransaction();
         $data = array();
@@ -70,10 +66,11 @@ class UserController extends Controller
         if ($image) {
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name . '.' . $ext;
             $upload_patch = 'public/media/';
+            $image_full_name = $image_name . '.' . $ext;
             $image_url = $upload_patch . $image_full_name;
             $success = $image->move($upload_patch, $image_full_name);
+
             $data['avatar'] =  $image_url;
         }
         $user = $this->user->create($data);
@@ -107,10 +104,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
         $user = $this->user->findOrFail($id);
         $roles = $this->role->all();
         $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
         return view('admin.user.edit',compact('user','roles','roleOfUser'));
+
     }
 
     /**
@@ -122,6 +121,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         try {
         DB::beginTransaction();
         $data = array();
@@ -161,7 +161,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user)
     {
         try {
             DB::beginTransaction();

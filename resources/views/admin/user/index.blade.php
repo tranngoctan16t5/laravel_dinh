@@ -62,5 +62,8 @@
         {!! $users !!}
         </div>
         <!-- /.box-body -->
+        <div class="box-footer">
+            {{ $users }}
+        </div>
     </div>
     @endsection
