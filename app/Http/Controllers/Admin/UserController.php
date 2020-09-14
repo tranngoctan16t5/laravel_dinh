@@ -29,7 +29,8 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->user->paginate(5);
-        return view('admin.user.index',compact('users'));
+
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -40,7 +41,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = $this->role->all();
-        return view('admin.user.create',compact('roles'));
+
+        return view('admin.user.create', compact('roles'));
     }
 
     /**
@@ -51,6 +53,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+
       try {
         DB::beginTransaction();
         $data = array();
@@ -66,18 +69,18 @@ class UserController extends Controller
         if ($image) {
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
-            $upload_patch = 'public/media/';
             $image_full_name = $image_name . '.' . $ext;
+            $upload_patch = 'public/media/';
             $image_url = $upload_patch . $image_full_name;
             $success = $image->move($upload_patch, $image_full_name);
-
             $data['avatar'] =  $image_url;
         }
         $user = $this->user->create($data);
         $user->roles()->attach($request->role);
         Session::put('message','Create user successfully !');
         DB::commit();
-        return redirect()->route('users.index');
+
+        return redirect()->route('users.index')->with('success', 'User created');
       } catch (Exception $e) {
         DB::rollBack();
       }
@@ -93,7 +96,8 @@ class UserController extends Controller
     {
         $user = $this->user->findOrFail($id);
         $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
-        return view('admin.user.show',compact('user','roleOfUser'));
+
+        return view('admin.user.show', compact('user', 'roleOfUser'));
     }
 
     /**
@@ -104,12 +108,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
         $user = $this->user->findOrFail($id);
         $roles = $this->role->all();
         $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
-        return view('admin.user.edit',compact('user','roles','roleOfUser'));
 
+        return view('admin.user.edit', compact('user', 'roles', 'roleOfUser'));
     }
 
     /**
@@ -121,7 +124,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         try {
         DB::beginTransaction();
         $data = array();
@@ -149,7 +151,8 @@ class UserController extends Controller
         $user = $this->user->find($id);
         $user->roles()->sync($request->role);
         DB::commit();
-        return redirect()->route('users.index');
+
+        return redirect()->route('users.index')->with('success', 'User edited');
       } catch (Exception $e) {
         DB::rollBack();
       }
@@ -169,7 +172,8 @@ class UserController extends Controller
             $user->delete($id);
             $user->roles()->detach();
             DB::commit();
-            return redirect()->back();
+
+            return redirect()->route('users.index')->with('success', 'User deleted');
         } catch (Exception $e) {
              DB::rollBack();
         }
