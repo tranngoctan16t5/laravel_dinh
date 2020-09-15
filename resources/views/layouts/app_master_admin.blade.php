@@ -54,6 +54,13 @@
                <div class="navbar-custom-menu">
                   <ul class="nav navbar-nav">
                      <!-- Messages: style can be found in dropdown.less-->
+                       <li class="nav-item">
+                            <a class="nav-link" href="{{ route('language.index',['vi']) }}">VI</a>
+                        </li>
+
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ route('language.index',['en']) }}">EN</a>
+                        </li>
                      <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
@@ -220,6 +227,11 @@
                   <li class="nav-item">
                      <a class="nav-link" href="{{ route('users.index') }}">
                      <i class="fa fa-table"></i> <span>User</span>
+                     </a>
+                  </li>
+                    <li class="nav-item">
+                     <a class="nav-link" href="{{ route('subject.index') }}">
+                     <i class="fa fa-table"></i> <span>Subject</span>
                      </a>
                   </li>
                   <!-- user -->
