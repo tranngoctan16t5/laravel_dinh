@@ -1,6 +1,6 @@
 @extends('layouts.app_master_admin')
 @section('content')
-<h1>Index Courses</h1>
+<h1>List Courses</h1>
     <a href="{{ route('courses.create')}}" type="button" class="btn btn-md btn-info">Add Course <i class="fa fa-plus"></i></a>
     <div class="box-body table-responsive no-padding">
          @if (session('success'))
@@ -8,7 +8,7 @@
             {{ session('success') }}
          </div>
       @endif
-        <table class="table table-hover">
+        <table class="table table-hover table-striped table-bordered">
             <tbody>
                 <tr>
                     <th>Name</th>
@@ -29,8 +29,8 @@
                              <img width="50px" height="50px" src="{{URL::to($course->image)}}" alt="">
                          </div>
                      </td>
-                    <td>{{ $course->start_day}}</td>
-                    <td>{{ $course->end_day}}</td>
+                    <td>{{ date('Y/m/d',strtotime($course->start_day))}}</td>
+                    <td>{{ date('Y/m/d',strtotime($course->end_day))}}</td>
 
 
                     <td>

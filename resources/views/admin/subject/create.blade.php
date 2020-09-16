@@ -9,23 +9,23 @@
     <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('subject.store') }}"  >
         @csrf
         <div class="box-body">
-            <div class="form-group ">
-                <label >{{trans('message.subjectname') }}</label>
+            <div class="form-group {{ $errors->first('name') ? 'has-error' : ''}} ">
+                <label class="control-label" >{{trans('message.subjectname') }}</label>
                 <input type="text" class="form-control" value="{{ old('name') }}" name="name" placeholder="Enter subject name">
                 @error('subjectname')
                 <div class="text-danger">{{ $errors->first('name') }}</div>
                 @enderror
             </div>
-            <div class="form-group ">
-                <label for="exampleInputDescription">{{trans('message.description') }}</label>
+            <div class="form-group {{ $errors->first('description') ? 'has-error' : ''}} ">
+                <label class="control-label" for="exampleInputDescription">{{trans('message.description') }}</label>
                 <textarea type="text" class="form-control" value="{{ old('description') }}" id="exampleInputDescription" name="description" placeholder="Enter Description">
                 </textarea>
                 @error('description')
                 <div class="text-danger">{{ $errors->first('description') }}</div>
                 @enderror
             </div>
-            <div class="form-group ">
-                <label for="exampleInputFile">{{trans('message.image') }}</label>
+            <div class="form-group {{ $errors->first('image') ? 'has-error' : ''}}">
+                <label class="control-label" for="exampleInputFile">{{trans('message.image') }}</label>
                 <input type="file" name="image" value="{{ old('image') }}" id="exampleInputFile">
                 @error('image')
                 <div class="text-danger">{{ $errors->first('image') }}</div>

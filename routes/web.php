@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
 
     Route::group(['middleware' => ['admin']], function(){
         Route::get('/','Admin\AdminController@index')->name('admin');
+        Route::get('logout','Admin\AdminController@logout')->name('admin.logout');
     });
 
     //user

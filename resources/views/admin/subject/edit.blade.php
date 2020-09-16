@@ -11,15 +11,15 @@
         @method('PUT')
         <div class="box-body">
             <input type="hidden" name="id">
-            <div class="form-group ">
-                <label >{{trans('message.subjectname')}}</label>
+            <div class="form-group {{ $errors->first('name') ? 'has-error' : ''}}  ">
+                <label class="control-label" >{{trans('message.subjectname')}}</label>
                 <input type="text" class="form-control"  name="name" value="{{ $subject->name }}" placeholder="Enter subject name">
                 @error('name')
                 <div class="text-danger">{{ $errors->first('name') }}</div>
                 @enderror
             </div>
-            <div class="form-group ">
-                <label for="exampleInputDescription">{{trans('message.description')}}</label>
+            <div class="form-group {{ $errors->first('description') ? 'has-error' : ''}} ">
+                <label class="control-label" for="exampleInputDescription">{{trans('message.description')}}</label>
                 <textarea  class="form-control"  id="exampleInputDescription" name="description" placeholder="Enter Description">
                     {{ $subject->description }}
                 </textarea>
@@ -28,15 +28,15 @@
                 @enderror
             </div>
 
-            <div class="form-group ">
-                <label for="exampleInputFile">{{trans('message.image')}}</label>
+            <div class="form-group {{ $errors->first('image') ? 'has-error' : ''}} ">
+                <label class="control-label" for="exampleInputFile">{{trans('message.image')}}</label>
                 <input type="file" name="image" value="{{ $subject->image }}"  id="exampleInputFile">
                 @error('image')
                 <div class="text-danger">{{ $errors->first('image') }}</div>
                 @enderror
             </div>
                  <div class="form-group ">
-                <label for="exampleInputFile">{{trans('message.imageold')}}</label>
+                <label class="control-label" for="exampleInputFile">{{trans('message.imageold')}}</label>
                 <img width="100px" height="100px" src="{{ asset($subject->image)}}" alt="">
                 <input type="hidden" name="old_image" value="{{$subject->image}}">
             </div>

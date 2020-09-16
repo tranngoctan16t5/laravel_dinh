@@ -1,12 +1,6 @@
 @extends('layouts.app_master_admin')
 @section('content')
 <h2 class="text-info">{{trans('message.listsubject')}}</h2>
-@if(Session::get('message'))
-<div class="alert alert-success">{{Session::get('message')}}</div>
-@php
-Session::put('message',null);
-@endphp
-@endif
 <a href="{{ route('subject.create')}}" type="button" class="btn btn-md btn-info">{{trans('message.addsubject')}}<i class="fa fa-plus"></i></a>
 <!-- /.box-header -->
 <div class="box-body table-responsive no-padding">
@@ -15,7 +9,7 @@ Session::put('message',null);
     {{ session('message') }}
 </div>
 @endif
-<table class="table table-hover">
+<table class="table table-hover table-striped table-bordered ">
     <tbody>
         <tr>
             <th>{{trans('message.name')}}</th>
@@ -27,7 +21,7 @@ Session::put('message',null);
         <tr>
             <td>{{ $subject->name}}</td>
             <td>{{ $subject->description}}</td>
-            <td>{{ $subject->image}}</td>
+            <td><img width="50px" width="50px" src="{{asset($subject->image)}}" alt=""></td>
             <td>
                 <a href="{{ route('subject.edit',$subject->id)}}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i>{{trans('message.edit')}}</a>
                 <form style="display: inline;" action="{{ route('subject.destroy',$subject->id)}}" id="delete_form" method="POST">

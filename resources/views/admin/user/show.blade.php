@@ -1,5 +1,7 @@
 @extends('layouts.app_master_admin')
 @section('content')
+<section class="content">
+
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">View User</h3>
@@ -60,4 +62,5 @@
         </div>
     </form>
 </div>
+</section>
 @endsection

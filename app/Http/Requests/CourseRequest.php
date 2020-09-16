@@ -28,8 +28,8 @@ class CourseRequest extends FormRequest
             'description' => 'required',
             'duration' => 'required',
             'image' => 'required',
-            'start_day' => 'required',
-            'end_day' => 'required',
+            'start_day'    => 'required|date',
+            'end_day' => 'required|date|after_or_equal:start_day',
         ];
     }
 }
