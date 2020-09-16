@@ -14,4 +14,7 @@ class AdminController extends Controller
     public function permissionDenied(){
         return view('errors.nopermission');
     }
+    public function logout(){
+        return redirect()->route('home');
+    }
 }

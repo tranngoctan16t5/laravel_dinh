@@ -48,6 +48,7 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request)
     {
+
         try {
         DB::beginTransaction();
         $data = array();

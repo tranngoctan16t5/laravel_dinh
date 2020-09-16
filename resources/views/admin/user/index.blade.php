@@ -1,10 +1,8 @@
 @extends('layouts.app_master_admin')
 @section('content')
-
-<h1>Index user</h1>
-{{-- <div class="box">
+<div class="box">
     <div class="box-header">
-        <h3 class="box-title">Responsive Hover Table</h3>
+        <h1 class="box-title">List User</h1>
         <div class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -13,7 +11,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     @if(Session::get('message'))
      <div class="alert alert-success">{{Session::get('message')}}</div>
      @php
@@ -31,7 +29,7 @@
             {{ session('success') }}
          </div>
       @endif
-        <table class="table table-hover">
+        <table class="table table-hover table-striped table-bordered">
             <tbody>
                 <tr>
                     <th>Username</th>
@@ -39,6 +37,7 @@
                     <th>Gender</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th>Action</th>
                 </tr>
                  @foreach($users as $user)
                 <tr>
@@ -49,13 +48,14 @@
                     </td>
                     <td>{{ $user->email}}</td>
                     <td>{{ $user->address}}</td>
+
                     <td>
                         <a href="{{ route('users.show',$user->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle"></i>Detail</a>
                         <a href="{{ route('users.edit',$user->id)}}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i>Edit</a>
-                        <form action="{{ route('users.destroy',$user->id)}}" id="delete_form" method="POST">
+                        <form style="display: inline;" action="{{ route('users.destroy',$user->id)}}" id="delete_form" method="POST">
                             @method('delete')
                             @csrf
-                            <button type="submit">Delete</button>
+                            <button  type="submit" class="btn btn-xs btn-danger">Delete</button>
                              {{-- <a href="javascript:$('#delete_form').submit();" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a> --}}
                         </form>
 
@@ -70,4 +70,5 @@
             {{ $users }}
         </div>
     </div>
+
     @endsection
