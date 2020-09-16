@@ -43,6 +43,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
 
     Route::resource('subject','Admin\SubjectController');
 
+    Route::get('trainer','Admin\TrainerController@index')->name('trainer.index');
+
 
 });
 

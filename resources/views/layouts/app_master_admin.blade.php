@@ -237,8 +237,20 @@
          </li>
 
          <li class="nav-item">
-            <a class="nav-link" href="{{ route('subject.index') }}">
-               <i class="fa fa-table"></i> <span>Subject</span>
+            <a class="nav-link" href="{{ route('trainer.index') }}">
+               <i class="fa fa-table"></i> <span>Trainer</span>
+            </a>
+         </li>
+
+         <li class="nav-item">
+            <a class="nav-link" href="{{ route('trainer.index') }}">
+               <i class="fa fa-table"></i> <span>View all trainer</span>
+            </a>
+         </li>
+
+         <li class="nav-item">
+            <a class="nav-link" href="#">
+               <i class="fa fa-table"></i> <span>View all trainee</span>
             </a>
          </li>
          <!-- user -->
