@@ -8,6 +8,7 @@ use App\Models\Course;
 use DB;
 use Carbon\Carbon;
 use App\Http\Requests\CourseRequest;
+use App\Http\Requests\CourseEditRequest;
 use Illuminate\Support\Facades\Config;
 
 
@@ -26,7 +27,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = $this->course->paginate(5);
+        $courses = $this->course->paginate(Config::get('app.paginate'));
 
         return view('admin.course.index', compact('courses'));
     }
@@ -49,7 +50,6 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request)
     {
-
         try {
         DB::beginTransaction();
         $data = array();
@@ -65,10 +65,11 @@ class CourseController extends Controller
         $course = $this->course->create($data);
         DB::commit();
 
-        return redirect()->route('courses.index')>with('success',trans('messages.course.success'));
+        return redirect()->route('courses.index')>with('success','Add new course success');
       } catch (Exception $e) {
         DB::rollBack();
-        return redirect()->back()>with('error',trans('messages.course.error'));
+
+        return redirect()->back()>with('error','Add new course error');
       }
     }
 
@@ -91,7 +92,8 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $course = $this->course->findOrFail($id);
+        return view('admin.course.edit',compact('course'));
     }
 
     /**
@@ -101,9 +103,31 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CourseEditRequest $request, $id)
     {
-        //
+        try {
+        DB::beginTransaction();
+        $data = array();
+        $data['name'] = $request->name;
+        $data['description'] = $request->description;
+        $data['duration'] = $request->duration;
+        $data['start_day'] = $request->start_day;
+        $data['end_day'] = $request->end_day;
+        $image = $request->file('image');
+        $old_avatar = $request->old_avatar;
+        if ($image) {
+            unlink($old_avatar);
+            $data['image'] =  uploadImage($image);
+        }
+        $course = $this->course->where('id',$id)->update($data);
+        DB::commit();
+
+        return redirect()->route('courses.index')->with('success',trans('message.course.editsuccess'));
+      } catch (Exception $e) {
+        DB::rollBack();
+
+        return redirect()->back()->with('error','Edit course error');
+      }
     }
 
     /**
@@ -114,6 +138,15 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $course = $this->course->findOrFail($id);
+            $course->delete($id);
+            DB::commit();
+
+            return redirect()->route('courses.index')->with('success', 'Course deleted');
+        } catch (Exception $e) {
+             DB::rollBack();
+        }
     }
 }

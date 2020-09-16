@@ -2,9 +2,9 @@
 
 namespace app\http\requests;
 
-use illuminate\foundation\http\formrequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class courseeditrequest extends formrequest
+class CourseEditrequest extends FormRequest
 {
     /**
      * determine if the user is authorized to make this request.
@@ -27,9 +27,8 @@ class courseeditrequest extends formrequest
             'name' => 'required',
             'description' => 'required',
             'duration' => 'required',
-            'image' => 'required',
-            'start_day' => 'required',
-            'end_day' => 'required',
+            'start_day'    => 'required|date',
+            'end_day' => 'required|date|after_or_equal:start_day',
         ];
     }
 }

@@ -39,4 +39,8 @@ return [
     'action' => 'Action',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'course' => [
+        'addsuccess' => 'Insert course success',
+        'editsuccess' => 'Edit course success',
+    ],
 ];

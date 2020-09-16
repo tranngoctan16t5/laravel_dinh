@@ -17,7 +17,7 @@
             </div>
             <div class="form-group {{ $errors->first('description') ? 'has-error' : ''}}">
                 <label class="control-label" for="exampleInputEmail1">Description</label>
-                <textarea type="text" class="form-control" value="{{ old('description') }}" id="exampleInputEmail1" name="description" placeholder="Enter Description" ></textarea>
+                <textarea type="text" class="form-control" id="exampleInputEmail1" name="description" placeholder="Enter Description" >{{ old('description') }}</textarea>
                 @error('description')
                     <div class="text-danger">{{ $errors->first('description') }}</div>
                 @enderror

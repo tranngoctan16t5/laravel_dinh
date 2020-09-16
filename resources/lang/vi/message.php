@@ -39,5 +39,10 @@ return [
     'action' => 'Tác vụ',
     'edit' => 'Chỉnh sửa',
     'delete' => 'Xoá',
+    'course' => [
+        'addsuccess' => 'Thêm mới khóa học thành công',
+        'editsuccess' => 'Chỉnh sửa khóa học thành công',
+    ],
+
 
 ];
