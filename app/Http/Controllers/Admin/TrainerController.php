@@ -24,7 +24,7 @@ class TrainerController extends Controller
     {
         $courses = $this->course->all();
 
-        $course_user = DB::table('users')->get();
+        $course_user = DB::table('course_user')->get();
         $trainers = DB::table('users')->join('role_user','users.id','=','user_id')->where('role_user.role_id','=','1')->get();
         return view('admin.trainer.index',compact('trainers','courses','course_user'));
     }

@@ -24,8 +24,8 @@
     <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
-       @if (session('success'))
-       <div class="alert alert-success">
+     @if (session('success'))
+     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
@@ -35,7 +35,7 @@
                 <th>Username</th>
                 <th>Phone</th>
                 <th>Email</th>
-                    <th>status</th>
+                <th>status</th>
                 <th>course</th>
 
 
@@ -45,11 +45,23 @@
                 <td>{{ $trainer->username}}</td>
                 <td>{{ $trainer->phone}}</td>
                 <td>{{ $trainer->email}}</td>
-                @foreach($course_user as $key => $value)
+
                 <td>
-                    <button class="btn btn-xs btn-info" >
-                        {{$value[$key]->user_id == $trainner->user_id && $value[$key]->status == '1' ? 'dang hoc' : 'chua hoc'}}</button>
-                    </td>
+
+                  <button class="btn btn-xs btn-info" >
+                     @foreach($course_user as $value)
+                    @if(($value->user_id == $trainer->user_id) && ($value->status == '1'))
+                    @php
+                        echo "dang hoc";
+                    @endphp
+                    @break
+                    @endif
+
+
+                    @endforeach
+                </button>
+                </td>
+
                 <td>
 
                     <div class="form-group  ">
