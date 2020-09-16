@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-include 'route_admin.php';
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +22,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/permission-denied','Admin\AdminController@permissionDenied')->name('nopermission');
+
+Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
+    // Route::get('/',function(){
+    //     return view('admin.index');
+    // });
+
+    Route::group(['middleware' => ['admin']], function(){
+        Route::get('/','Admin\AdminController@index')->name('admin');
+    });
+
+    //user
+    Route::resource('users', 'Admin\UserController');
+    Route::resource('courses', 'Admin\CourseController');
+
+});
+

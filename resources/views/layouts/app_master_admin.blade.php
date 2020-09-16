@@ -222,6 +222,21 @@
                      <i class="fa fa-table"></i> <span>User</span>
                      </a>
                   </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{{ route('courses.index') }}">
+                     <i class="fa fa-table"></i> <span>Courses</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{{ route('users.index') }}">
+                     <i class="fa fa-table"></i> <span>User</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{{ route('users.index') }}">
+                     <i class="fa fa-table"></i> <span>User</span>
+                     </a>
+                  </li>
                   <!-- user -->
                </ul>
             </section>
@@ -448,7 +463,19 @@
             autoclose: true,
             todayHighlight: true,
             rtl: true,
-            orientation: "bottom",
+            orientation: "bottom left",
+
+            });
+      </script>
+      <script type="text/javascript">
+            $( "#datepicker1" ).datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 0,
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true,
+            rtl: true,
+            orientation: "bottom left",
 
             });
       </script>
