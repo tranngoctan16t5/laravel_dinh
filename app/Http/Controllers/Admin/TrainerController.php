@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use DB;
+
 
 class TrainerController extends Controller
 {
@@ -17,10 +20,8 @@ class TrainerController extends Controller
     public function index()
     {
 
-        $category_by_id = DB::table('tbl_product')->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
-        ->where('tbl_product.category_id',$category_id)->get();
-
-        $trainer = DB::table('users')->join('roles')->join('role_user','users.id',)
+        $trainer = DB::table('users')->join('role_user','users.id','=','user_id')->where('role_user.role_id','=','1')->get();
+        dd($trainer);
         return view('admin.trainer.index');
     }
 }
