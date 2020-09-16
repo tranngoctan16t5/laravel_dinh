@@ -6,22 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
+use App\Models\Course;
 
 
 class TrainerController extends Controller
 {
 
     private $user;
+    private $course;
 
-    public function __construct(User $user) {
+    public function __construct(User $user,Course $course) {
         $this->user = $user;
+        $this->course = $course;
     }
 
     public function index()
     {
+        $courses = $this->course->all();
 
-        $trainer = DB::table('users')->join('role_user','users.id','=','user_id')->where('role_user.role_id','=','1')->get();
-        dd($trainer);
-        return view('admin.trainer.index');
+        $course_user = DB::table('users')->get();
+        $trainers = DB::table('users')->join('role_user','users.id','=','user_id')->where('role_user.role_id','=','1')->get();
+        return view('admin.trainer.index',compact('trainers','courses','course_user'));
     }
 }

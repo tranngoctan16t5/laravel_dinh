@@ -13,10 +13,10 @@
         </div>
     </div>
     @if(Session::get('message'))
-     <div class="alert alert-success">{{Session::get('message')}}</div>
-     @php
-     Session::put('message',null);
-     @endphp
+    <div class="alert alert-success">{{Session::get('message')}}</div>
+    @php
+    Session::put('message',null);
+    @endphp
     @endif
 
 
@@ -24,51 +24,52 @@
     <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
-         @if (session('success'))
-         <div class="alert alert-success">
-            {{ session('success') }}
-         </div>
-      @endif
-        <table class="table table-hover table-striped table-bordered">
-            <tbody>
-                <tr>
-                    <th>Username</th>
-                    <th>Phone</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Action</th>
-                </tr>
-                 @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->username}}</td>
-                    <td>{{ $user->phone}}</td>
-                    <td>
-                        {{ $user->gender ? 'Male' : 'Female'}}
-                    </td>
-                    <td>{{ $user->email}}</td>
-                    <td>{{ $user->address}}</td>
-
-                    <td>
-                        <a href="{{ route('users.show',$user->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle"></i>Detail</a>
-                        <a href="{{ route('users.edit',$user->id)}}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i>Edit</a>
-                        <form style="display: inline;" action="{{ route('users.destroy',$user->id)}}" id="delete_form" method="POST">
-                            @method('delete')
-                            @csrf
-                            <button  type="submit" class="btn btn-xs btn-danger">Delete</button>
-                             {{-- <a href="javascript:$('#delete_form').submit();" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Delete</a> --}}
-                        </form>
-
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            {{ $users }}
-        </div>
+       @if (session('success'))
+       <div class="alert alert-success">
+        {{ session('success') }}
     </div>
+    @endif
+    <table class="table table-hover table-striped table-bordered">
+        <tbody>
+            <tr>
+                <th>Username</th>
+                <th>Phone</th>
+                <th>Email</th>
+                    <th>status</th>
+                <th>course</th>
 
-    @endsection
+
+            </tr>
+            @foreach($trainers as $trainer)
+            <tr>
+                <td>{{ $trainer->username}}</td>
+                <td>{{ $trainer->phone}}</td>
+                <td>{{ $trainer->email}}</td>
+                @foreach($course_user as $key => $value)
+                <td>
+                    <button class="btn btn-xs btn-info" >
+                        {{$value[$key]->user_id == $trainner->user_id && $value[$key]->status == '1' ? 'dang hoc' : 'chua hoc'}}</button>
+                    </td>
+                <td>
+
+                    <div class="form-group  ">
+                        <select name="course" class="form-control">
+                            @foreach ($courses as $course)
+                            <option  value="{{ $course->id }}">{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+<!-- /.box-body -->
+<div class="box-footer">
+
+</div>
+</div>
+
+@endsection
