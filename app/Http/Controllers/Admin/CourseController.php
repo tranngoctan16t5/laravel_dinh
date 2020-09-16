@@ -8,6 +8,7 @@ use App\Models\Course;
 use DB;
 use Carbon\Carbon;
 use App\Http\Requests\CourseRequest;
+use Illuminate\Support\Facades\Config;
 
 
 
@@ -58,20 +59,15 @@ class CourseController extends Controller
         $data['end_day'] = $request->end_day;
         $image = $request->file('image');
         if ($image) {
-            $image_name = date('dmy_H_s_i');
-            $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name . '.' . $ext;
-            $upload_patch = 'public/media/';
-            $image_url = $upload_patch . $image_full_name;
-            $success = $image->move($upload_patch, $image_full_name);
-            $data['image'] =  $image_url;
+            $data['image'] =  uploadImage($image);
         }
         $course = $this->course->create($data);
         DB::commit();
 
-        return redirect()->route('courses.index')->with('success', 'Courses created');
+        return redirect()->route('courses.index')>with('success',trans('messages.course.success'));
       } catch (Exception $e) {
         DB::rollBack();
+        return redirect()->back()>with('error',trans('messages.course.error'));
       }
     }
 
