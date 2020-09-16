@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/permission-denied','Admin\AdminController@permissionDenied')->name('nopermission');
+
 Route::get('language/{language}','Admin\LanguageController@index')->name('language.index');
 
 //admin
@@ -35,7 +37,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
 
     //user
     Route::resource('users', 'Admin\UserController');
+
+    Route::resource('courses', 'Admin\CourseController');
+
     Route::resource('subject','Admin\SubjectController');
+
 
 });
 
