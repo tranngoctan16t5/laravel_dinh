@@ -35,8 +35,9 @@
                 <th>Username</th>
                 <th>Phone</th>
                 <th>Email</th>
-                    <th>status</th>
-                <th>course</th>
+                <th>Detail</th>
+ {{--                <th>status</th>
+                <th>course</th> --}}
 
 
             </tr>
@@ -45,11 +46,25 @@
                 <td>{{ $trainer->username}}</td>
                 <td>{{ $trainer->phone}}</td>
                 <td>{{ $trainer->email}}</td>
-                @foreach($course_user as $key => $value)
                 <td>
+                     <a href="{{ route('trainer.show',$trainer->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle"></i>Detail</a>
+                </td>
+
+
+{{--
+                   <td>
+                     @foreach($course_user as $value)
                     <button class="btn btn-xs btn-info" >
-                        {{$value[$key]->user_id == $trainner->user_id && $value[$key]->status == '1' ? 'dang hoc' : 'chua hoc'}}</button>
-                    </td>
+                        {{ $value->user_id == $trainer->id ? ($value->status == '1' ? 'dang hoc' : 'chua hoc') : ''}}
+                    </button>
+                      @endforeach
+                 </td> --}}
+
+
+
+
+{{--
+
                 <td>
 
                     <div class="form-group  ">
@@ -60,7 +75,8 @@
                         </select>
                     </div>
 
-                </td>
+                </td> --}}
+
             </tr>
             @endforeach
         </tbody>
