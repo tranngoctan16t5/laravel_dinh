@@ -229,7 +229,7 @@
                      <i class="fa fa-table"></i> <span>User</span>
                      </a>
                   </li>
-<<<<<<< HEAD
+
                   <li class="nav-item">
                      <a class="nav-link" href="{{ route('courses.index') }}">
                      <i class="fa fa-table"></i> <span>Courses</span>
@@ -243,11 +243,11 @@
                   <li class="nav-item">
                      <a class="nav-link" href="{{ route('users.index') }}">
                      <i class="fa fa-table"></i> <span>User</span>
-=======
+
                     <li class="nav-item">
                      <a class="nav-link" href="{{ route('subject.index') }}">
                      <i class="fa fa-table"></i> <span>Subject</span>
->>>>>>> 19cb2b8d047d723cc376069ed8ad16ae01db7d3c
+
                      </a>
                   </li>
                   <!-- user -->
