@@ -1,5 +1,6 @@
 @extends('layouts.app_master_admin')
 @section('content')
+
 <h1>Index user</h1>
 {{-- <div class="box">
     <div class="box-header">
@@ -13,6 +14,15 @@
             </div>
         </div>
     </div> --}}
+    @if(Session::get('message'))
+     <div class="alert alert-success">{{Session::get('message')}}</div>
+     @php
+     Session::put('message',null);
+     @endphp
+    @endif
+
+
+
     <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
