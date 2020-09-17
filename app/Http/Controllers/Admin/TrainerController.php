@@ -34,10 +34,11 @@ class TrainerController extends Controller
     {
         $courses = $this->course->all();
         $courseOfuser =$this->user->find($id)->courses()->pluck('name');
+        $courseActiveUser = $this->user->find($id)->courses()->pluck('status');
 
         $user = $this->user->findOrFail($id);
 
-        return view('admin.trainer.show',compact('user','courses','courseOfuser'));
+        return view('admin.trainer.show',compact('user','courses','courseOfuser','courseActiveUser'));
     }
 
     public function choose(Request $request){
