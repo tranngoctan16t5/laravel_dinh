@@ -26,7 +26,7 @@
                 <th>Username</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Detail</th>
+                <th>Choose course and profile</th>
             </tr>
 
             @foreach($supervisors as $super)

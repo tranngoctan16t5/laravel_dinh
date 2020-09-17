@@ -18,78 +18,40 @@
     Session::put('message',null);
     @endphp
     @endif
-
-
-
-
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
-     @if (session('success'))
-     <div class="alert alert-success">
-        {{ session('success') }}
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        <table class="table table-hover table-striped table-bordered">
+            <tbody>
+                <tr>
+                    <th>Username</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Choose course and profile</th>
+                    {{--                <th>status</th>
+                    <th>course</th> --}}
+                </tr>
+                @foreach($trainers as $trainer)
+                <tr>
+                    <td>{{ $trainer->username}}</td>
+                    <td>{{ $trainer->phone}}</td>
+                    <td>{{ $trainer->email}}</td>
+                    <td>
+                        <a href="{{ route('trainer.show',$trainer->user_id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle" ></i>Details</a>
+
+                    </td>
+                    <!-- The Modal -->
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    @endif
-    <table class="table table-hover table-striped table-bordered">
-        <tbody>
-            <tr>
-                <th>Username</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Detail</th>
- {{--                <th>status</th>
-                <th>course</th> --}}
-            </tr>
-
-            @foreach($trainers as $trainer)
-            <tr>
-                <td>{{ $trainer->username}}</td>
-                <td>{{ $trainer->phone}}</td>
-                <td>{{ $trainer->email}}</td>
-
-                <td>
-                     <a href="{{ route('trainer.show',$trainer->user_id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle" ></i>Detail</a>
-
-                </td>
-                     <!-- The Modal -->
-
-
-
-{{--
-                   <td>
-                     @foreach($course_user as $value)
-                    <button class="btn btn-xs btn-info" >
-                        {{ $value->user_id == $trainer->id ? ($value->status == '1' ? 'dang hoc' : 'chua hoc') : ''}}
-                    </button>
-                      @endforeach
-                 </td> --}}
-
-
-
-
-{{--
-
-
-                <td>
-
-                    <div class="form-group  ">
-                        <select name="course" class="form-control">
-                            @foreach ($courses as $course)
-                            <option  value="{{ $course->id }}">{{ $course->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                </td> --}}
-
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <!-- /.box-body -->
+    <div class="box-footer">
+    </div>
 </div>
-<!-- /.box-body -->
-<div class="box-footer">
-
-</div>
-</div>
-
 @endsection
