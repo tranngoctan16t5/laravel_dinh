@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a>
+    {{-- <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a> --}}
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
        @if (session('success'))

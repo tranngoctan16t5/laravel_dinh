@@ -44,17 +44,18 @@ class TrainerController extends Controller
         $userId = $request->user_id;
         try{
 
-          DB::beginTransaction();
-          DB::table('course_user')->where('user_id',$userId)->update([
+        DB::beginTransaction();
+        DB::table('course_user')->where('user_id',$userId)->update([
             'status' => 0,
         ]);
-          DB::table('course_user')->insert([
+        DB::table('course_user')->insert([
             'user_id' => $userId,
             'course_id' => $request->course_id,
             'status' => 1,
 
         ]);
-          return route('trainer.show',$request->user_id);
+        DB::commit();
+        return redirect()->route('trainer.show',$userId)->with('success', 'Course created');
       }catch (Exception $e) {
         DB::rollBack();
     }
