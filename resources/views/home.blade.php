@@ -26,7 +26,7 @@
    <div class="sidebar-container">
       <div class="sidebar-header">
          <div class="brand">
-            <img alt="Sun" width="80" src="/packs/media/images/sun-logo-d67769668be9305fe08f1119c1ad8897.png">
+            <img alt="Sun" width="80" src="">
             <span>Education</span>
          </div>
       </div>

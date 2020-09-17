@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use App\Models\Course;
+use Carbon\Carbon;
 
 
 class TrainerController extends Controller
@@ -33,8 +34,8 @@ class TrainerController extends Controller
     public function show($id)
     {
         $courses = $this->course->all();
-        $courseOfuser =$this->user->find($id)->courses()->pluck('name');
-        $courseActiveUser = $this->user->find($id)->courses()->pluck('status');
+        $courseOfuser =$this->user->find($id)->courses()->where('status','=',1)->pluck('name');
+        // $courseActiveUser = $this->user->find($id)->courses()->pluck('status');
 
         $user = $this->user->findOrFail($id);
 
@@ -53,6 +54,8 @@ class TrainerController extends Controller
             'user_id' => $userId,
             'course_id' => $request->course_id,
             'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
 
         ]);
         DB::commit();

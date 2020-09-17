@@ -237,20 +237,20 @@
          </li>
 
          <li class="nav-item">
+            <a class="nav-link" href="{{ route('subject.index') }}">
+               <i class="fa fa-table"></i> <span>Subject</span>
+            </a>
+         </li>
+
+           <li class="nav-item">
             <a class="nav-link" href="{{ route('trainer.index') }}">
-               <i class="fa fa-table"></i> <span>Trainer</span>
+               <i class="fa fa-table"></i> <span>View all Trainee</span>
             </a>
          </li>
 
          <li class="nav-item">
-            <a class="nav-link" href="{{ route('trainer.index') }}">
-               <i class="fa fa-table"></i> <span>View all trainer</span>
-            </a>
-         </li>
-
-         <li class="nav-item">
-            <a class="nav-link" href="#">
-               <i class="fa fa-table"></i> <span>View all trainee</span>
+            <a class="nav-link" href="{{ route('supervisor.index')}}">
+               <i class="fa fa-table"></i> <span>View all supervisor</span>
             </a>
          </li>
          <!-- user -->

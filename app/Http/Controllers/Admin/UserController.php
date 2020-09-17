@@ -93,7 +93,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user->findOrFail($id);
-        $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id','status');
+        $roleOfUser = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
 
         return view('admin.user.show', compact('user', 'roleOfUser'));
     }

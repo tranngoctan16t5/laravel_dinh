@@ -46,6 +46,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
     Route::get('trainer','Admin\TrainerController@index')->name('trainer.index');
     Route::get('trainer/{id}','Admin\TrainerController@show')->name('trainer.show');
     Route::post('choosecourse','Admin\TrainerController@choose')->name('course.choose');
+    Route::get('supercourse','Admin\SupervisorController@index')->name('supervisor.index');
+    Route::get('supercourse/{id}','Admin\SupervisorController@show')->name('supervisor.show');
+    Route::post('superchoose','Admin\SupervisorController@choose')->name('super.choose');
 
 
 });

@@ -39,7 +39,7 @@
 
 
                     <td>
-                        <a href="{{ route('courses.show',$course->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle"></i>Detail</a>
+
                         <a href="{{ route('courses.edit',$course->id)}}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i>Edit</a>
                         <form style="display: inline;" action="{{ route('courses.destroy',$course->id)}}" id="delete_form" method="POST">
                             @method('delete')

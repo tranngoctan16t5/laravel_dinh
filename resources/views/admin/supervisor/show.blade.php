@@ -9,7 +9,7 @@
 </div>
 <div class="box">
     <div class="box-header">
-        <h1 class="box-title">Information Course of User</h1>
+        <h1 class="box-title">Information Course of supervisor</h1>
         <div class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -31,8 +31,9 @@
     <table class="table table-hover table-striped table-bordered">
         <tbody>
             <tr>
-                <th>Thông tin user</th>
-                <th>Khoá đang học</th>
+                <th>Thông tin supervisor</th>
+ {{--                <th>Khoá đã tham gia</th> --}}
+                <th>Khoá đang quản lý</th>
                 <th>Đăng ký khoá</th>
 
             </tr>
@@ -44,17 +45,17 @@
                     <span><b>Email:</b></span><p>{{$user->email}}</p>
                 </td>
                 <td>
-                    @foreach($courseOfuser as $value)
+                    @foreach($courseOfSuper as $value)
                     <h3>{{$value}}</h3>
                     @endforeach
                 </td>
-             {{--    <td>
-                    @foreach($courseActiveUser as $active)
+            {{--     <td>
+                    @foreach($courseActiveSuper as $active)
                     <button style="margin-top: 23px" class="btn btn-info btn-xs mt-5">{{ $active == 1 ? 'True' : 'false'}}</button><br>
                     @endforeach
                 </td> --}}
                 <td>
-                    <form action="{{route('course.choose')}}" method="post">
+                    <form action="{{route('super.choose')}}" method="post">
                         @csrf
                     <div class="form-group">
                       <div class="checkbox">

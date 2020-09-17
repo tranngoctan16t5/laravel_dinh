@@ -65,11 +65,11 @@ class CourseController extends Controller
         $course = $this->course->create($data);
         DB::commit();
 
-        return redirect()->route('courses.index')>with('success','Add new course success');
+        return redirect()->route('courses.index')->with('success','Add new course success');
       } catch (Exception $e) {
         DB::rollBack();
 
-        return redirect()->back()>with('error','Add new course error');
+        return redirect()->back()->with('error','Add new course error');
       }
     }
 

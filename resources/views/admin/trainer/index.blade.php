@@ -2,7 +2,7 @@
 @section('content')
 <div class="box">
     <div class="box-header">
-        <h1 class="box-title">List Trainer</h1>
+        <h1 class="box-title"><span>List Trainer</span></h1>
         <div class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -21,7 +21,7 @@
 
 
 
-    <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a>
+
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
      @if (session('success'))
