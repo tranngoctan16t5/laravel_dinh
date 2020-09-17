@@ -26,15 +26,40 @@ class TrainerController extends Controller
 
         $course_user = DB::table('course_user')->get();
         $trainers = DB::table('users')->join('role_user','users.id','=','user_id')->where('role_user.role_id','=','1')->get();
+         // $courseOfuser =$this->user->find($id)->courses()->pluck('name');
         return view('admin.trainer.index',compact('trainers','courses','course_user'));
     }
 
     public function show($id)
     {
         $courses = $this->course->all();
-        $courseOfuser = DB::table('course_user')->where('user_id',$id)->pluck('course_id','user_id','status');
+        $courseOfuser =$this->user->find($id)->courses()->pluck('name');
+
         $user = $this->user->findOrFail($id);
 
         return view('admin.trainer.show',compact('user','courses','courseOfuser'));
     }
+
+    public function choose(Request $request){
+        $userId = $request->user_id;
+        try{
+
+          DB::beginTransaction();
+          DB::table('course_user')->where('user_id',$userId)->update([
+            'status' => 0,
+        ]);
+          DB::table('course_user')->insert([
+            'user_id' => $userId,
+            'course_id' => $request->course_id,
+            'status' => 1,
+
+        ]);
+          return route('trainer.show',$request->user_id);
+      }catch (Exception $e) {
+        DB::rollBack();
+    }
+
+
 }
+}
+

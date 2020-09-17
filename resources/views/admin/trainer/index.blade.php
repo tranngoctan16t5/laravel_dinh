@@ -39,6 +39,7 @@
  {{--                <th>status</th>
                 <th>course</th> --}}
             </tr>
+
             @foreach($trainers as $trainer)
             <tr>
                 <td>{{ $trainer->username}}</td>
@@ -46,8 +47,11 @@
                 <td>{{ $trainer->email}}</td>
 
                 <td>
-                     <a href="{{ route('trainer.show',$trainer->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle"></i>Detail</a>
+                     <a href="{{ route('trainer.show',$trainer->user_id)}}" class="btn btn-xs btn-primary"><i class="fa fa-info-circle" ></i>Detail</a>
+
                 </td>
+                     <!-- The Modal -->
+
 
 
 {{--

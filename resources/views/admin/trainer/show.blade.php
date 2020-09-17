@@ -1,73 +1,71 @@
 @extends('layouts.app_master_admin')
 @section('content')
-<section class="content">
-
-<div class="box box-primary">
-    <div class="box-header with-border">
-        <h3 class="box-title">View User</h3>
-    </div>
-
-    <form role="form">
-        <div class="box-body">
-            <input type="hidden" name="id">
-            <div class="form-group ">
-                <label >Username</label>
-                <input type="text" class="form-control" value="{{ $user->username }}" >
-            </div>
-            <div class="form-group ">
-                <label for="exampleInputEmail1">Phone</label>
-                <input type="text" class="form-control" value="{{ $user->phone }}" >
-            </div>
-
-            <div class="form-group ">
-                <label>Gender</label>
-                <input type="text" class="form-control" value="{{ $user->gender == 1 ? 'Male' : 'Female' }}" >
-            </div>
-
-            <div class="form-group ">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" value="{{ $user->email }}" class="form-control" >
-            </div>
-            <div class="form-group ">
-                <label for="exampleInputPassword1">University</label>
-                <input type="text" value="{{ $user->university }}" class="form-control">
-            </div>
-             <div class="form-group ">
-                <label for="exampleInputPassword1">Address</label>
-                <input type="text" value="{{ $user->address }}" class="form-control">
-            </div>
-            <div class="form-group ">
-                <label>Bithday:</label>
-                <div class="input-group date">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input value="{{ date('Y/m/d', strtotime($user->birthday)) }}"  type="text" class="form-control pull-right">
+<div class="box-body table-responsive no-padding">
+   @if (session('message'))
+   <div class="alert alert-success">
+    {{ session('message') }}
+</div>
+@endif
+</div>
+<div class="box">
+    <div class="box-header">
+        <h1 class="box-title">Information Course of User</h1>
+        <div class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </div>
             </div>
-            <div class="form-group ">
-                <label for="exampleInputFile">Avatar</label>
-                <img width="200px" height="200px" src="{{URL::to($user->avatar)}}" alt="">
-            </div>
-
-            <div class="form-group ">
-                <label for="exampleInputPassword1">Course</label>
-                @foreach ($courseOfuser as $courseOfuser)
-                    <input type="text" value="{{ $courseOfuser->user_id }}" class="form-control">
-                @endforeach
-
-            </div>
-
-
-       {{--      <div class="form-group ">
-                <label for="exampleInputPassword1">Role</label>
-                <input type="text" value="{{ $roleOfUser[0] == 1 ? 'trainer' : 'supervisor' }}" class="form-control" >
-            </div> --}}
-
-
-
         </div>
-    </form>
+    </div>
+
+    <a href="{{ route('users.create')}}" type="button" class="btn btn-md btn-info">Add User <i class="fa fa-plus"></i></a>
+    <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+       @if (session('success'))
+       <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+    <table class="table table-hover table-striped table-bordered">
+        <tbody>
+            <tr>
+                <th>Khoá đã học</th>
+                <th>Đăng ký khoá</th>
+
+            </tr>
+            <tr>
+                <td>
+                    @foreach($courseOfuser as $value)
+                    <h2>{{$value}}</h2>
+                    @endforeach
+                </td>
+                <td>
+                    <form action="{{route('course.choose')}}" method="post">
+                        @csrf
+                    <div class="form-group">
+                      <div class="checkbox">
+                         <div class="form-group">
+                          <label>Select</label>
+                          <select name="course_id" class="form-control">
+                            @foreach($courses as $course)
+                            <option value="{{ $course->id }}">{{$course->name}}</option>
+                            @endforeach
+                        </select>
+                        <input type="hidden" name="user_id" value="{{ $user->id}}">
+                    </div>
+                    <button type="submit"  class="btn btn-info btn-xs">Submit</button>
+                    </form>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </div>
-</section>
+<!-- /.box-body -->
+<div class="box-footer">
+
+</div>
+</div>
 @endsection

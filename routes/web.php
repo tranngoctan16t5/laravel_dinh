@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
 
     Route::get('trainer','Admin\TrainerController@index')->name('trainer.index');
     Route::get('trainer/{id}','Admin\TrainerController@show')->name('trainer.show');
+    Route::post('choosecourse','Admin\TrainerController@choose')->name('course.choose');
 
 
 });
