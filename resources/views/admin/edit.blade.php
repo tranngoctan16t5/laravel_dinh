@@ -6,7 +6,8 @@
   </div>
   <!-- /.box-header -->
   <!-- form start -->
-  <form class="form-horizontal">
+  <form class="form-horizontal" action="{{route('profile.store',$user->id)}}" method="post">
+    @csrf
     <div class="box-body">
       <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">User Name</label>
@@ -54,6 +55,24 @@
         </div>
       </div>
 
+
+
+      <div class="form-group {{ $errors->first('birthday') ? 'has-error' : ''}} ">
+                <label class="control-label col-sm-2">Bithday:</label>
+                <div class="col-sm-10">
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input value="{{ date('Y/m/d', strtotime($user->birthday)) }}"  type="text" class="form-control pull-right" id="datepicker" name="birthday">
+                </div>
+                </div>
+                @error('birthday')
+                <div class="text-danger">{{ $errors->first('birthday') }}</div>
+                @enderror
+                <!-- /.input group -->
+            </div>
+
       <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
@@ -61,17 +80,35 @@
         </div>
       </div>
 
+         <div class="form-group {{ $errors->first('avatar') ? 'has-error' : ''}} ">
+                <label class="control-label col-sm-2" for="exampleInputFile">Avatar</label>
+                <div class="col-sm-10">
+                   <input type="file" name="avatar" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+                @error('avatar')
+                <div class="text-danger">{{ $errors->first('avatar') }}</div>
+                @enderror
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="exampleInputFile">Old Avatar</label>
+                <div class="col-sm-10 ">
+                <img width="200px" height="200px" src="{{URL::to($user->avatar)}}" alt="">
+                <input type="hidden" name="old_avatar" value="{{$user->avatar}}">
+                </div>
+            </div>
+
 
 
     <!-- /.box-body -->
     <div class="box-footer">
-      <form action="{{route('profile.store',$user->id)}}" method="post" >
-        @csrf
       <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <button type="reset" class="btn btn-info pull-right">Reset</button>
     </div>
     <!-- /.box-footer -->
-  </form>
+  </div>
+ </form>
 </div>
 @endsection

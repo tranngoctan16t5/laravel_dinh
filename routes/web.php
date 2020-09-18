@@ -52,6 +52,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
     Route::get('profile','Admin\AdminController@profile')->name('admin.profile');
     Route::get('profile/{id}','Admin\AdminController@edit')->name('profile.edit');
     Route::post('profile/{id}','Admin\AdminController@store')->name('profile.store');
+    Route::get('chooseforuser','Admin\AdminController@formSubmitCourseOfUser')->name('chooseforuser');
+    Route::post('submitcourse','Admin\AdminController@chooseCourseSubjectForUser')->name('submitofuser');
 
 
 

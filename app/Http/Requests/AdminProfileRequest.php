@@ -24,15 +24,15 @@ class AdminProfileRequest extends FormRequest
     public function rules()
     {
         return [
-           // 'username' => 'required|string',
-           // 'phone' => 'required',
-           // 'gender' => 'required',
-           // 'email' => 'required|unique:users,email',
-           // 'password' => 'required',
-           // 'address' => 'required',
-           // 'university' => 'required',
-           // 'birthday' => 'required',
-           // 'avatar' => 'required',
-       ];
-   }
+            'username' => 'required|string',
+            'phone' => 'required',
+            'gender' => 'required',
+            'email' => 'required',
+            // 'password' => 'required',
+            'address' => 'required',
+            'university' => 'required',
+            'birthday' => 'required',
+            // 'avatar' => 'required',
+        ];
+    }
 }

@@ -72,6 +72,17 @@
             </div>
           </div>
         </li>
+
+         <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">
+              <b>Birthday:</b>
+            </div>
+            <div class="col-md-8">
+              <p>{{Auth::user()->birthday}}</p>
+            </div>
+          </div>
+        </li>
       </ul>
       <a href="{{route('profile.edit',Auth::user()->id)}}" class="btn btn-primary btn-block">
         <i class="fa fa-edit"></i><b>Edit</b>

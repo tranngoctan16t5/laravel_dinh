@@ -12,6 +12,8 @@
    <link rel="stylesheet" href="{{ asset('admins/bower_components/font-awesome/css/font-awesome.min.css')}}">
    <!-- Ionicons -->
    <link rel="stylesheet" href="{{ asset('admins/bower_components/Ionicons/css/ionicons.min.css')}}">
+
+   <link rel="stylesheet" href="{{ asset('admins/plugins/iCheck/all.css')}}">
    <!-- Theme style -->
    <link rel="stylesheet" href="{{asset('admins/dist/css/AdminLTE.min.css')}}">
    <link rel="stylesheet" href="{{ asset('admins/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
@@ -21,6 +23,7 @@
          <link rel="stylesheet" href="{{asset('admins/dist/css/skins/_all-skins.min.css')}}">
          <!-- Pace style -->
          <link rel="stylesheet" href="{{asset('admins/plugins/pace/pace.min.css')}}">
+
          <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
          <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
@@ -253,6 +256,12 @@
                <i class="fa fa-table"></i> <span>View all supervisor</span>
             </a>
          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('chooseforuser')}}">
+               <i class="fa fa-table"></i> <span>Function 4 select</span>
+            </a>
+         </li>
          <!-- user -->
       </ul>
    </section>
@@ -287,8 +296,6 @@
          <script src="{{ asset('admins/bower_components/PACE/pace.min.js')}}"></script>
          <!-- SlimScroll -->
          <script src="{{ asset('admins/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
-         <!-- FastClick -->
-         <script src="{{ asset('admins/bower_components/fastclick/lib/fastclick.js')}}"></script>
          <!-- AdminLTE App -->
          <script src="{{ asset('admins/dist/js/adminlte.min.js')}}"></script>
          <!-- AdminLTE for demo purposes -->
@@ -331,7 +338,11 @@
             orientation: "bottom left",
 
          });
+
+
       </script>
+
+
 
    </body>
    </html>
