@@ -90,18 +90,30 @@ class AdminController extends Controller
         $courseId  = $request->course;
         $subjectId  = $request->subject;
 
+
+
         foreach ($traineeId as $id) {
             $trainee = $this->user->find($id);
-            $trainee->subjects()->attach($subjectId,['status' => 1]);
-            $trainee->courses()->attach($courseId,['status' => 1]);
+
+            if (!$trainee->subjects->has($subjectId)) {
+                 $trainee->subjects()->attach($subjectId,['status' => 1]);
+            }
+            if (!$trainee->courses->has($courseId)) {
+                 $trainee->courses()->attach($courseId,['status' => 1]);
+            }
         }
 
         $trainer = $this->user->find($trainerId);
-        $trainer->subjects()->attach($subjectId,['status' => 0]);
-        $trainer->courses()->attach($courseId,['status' => 0]);
+        if (!$trainee->subjects->has($subjectId)) {
+                $trainer->subjects()->attach($subjectId,['status' => 0]);
+        }
 
         $course = $this->course->find($courseId);
-        $course->subjects()->attach($subjectId);
+
+        if (!$course->subjects->has($subjectId)) {
+              $course->subjects()->attach($subjectId);
+        }
+
 
         DB::commit();
 
