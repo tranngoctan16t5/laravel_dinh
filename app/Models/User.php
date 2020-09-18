@@ -50,14 +50,14 @@ class User extends Authenticatable
     }
 
     public function roles(){
-        return $this->belongsToMany(Role::class,'role_user','user_id','role_id');
+        return $this->belongsToMany(Role::class,'role_user','user_id','role_id')->withTimestamps();;
     }
 
     public function courses(){
-        return $this->belongsToMany(Course::class,'course_user','user_id','course_id');
+        return $this->belongsToMany(Course::class,'course_user','user_id','course_id')->withTimestamps();;
     }
 
     public function subjects(){
-        return $this->belongsToMany(Subject::class,'user_subject','user_id','subject_id');
+        return $this->belongsToMany(Subject::class,'user_subject','user_id','subject_id')->withTimestamps();;
     }
 }

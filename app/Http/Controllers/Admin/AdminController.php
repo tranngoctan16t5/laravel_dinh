@@ -41,7 +41,7 @@ class AdminController extends Controller
         return view('admin.edit',compact('user'));
     }
     public function store(AdminProfileRequest $request,$id){
-         try {
+        try {
         DB::beginTransaction();
         $data = array();
         $data['username'] = $request->username;
@@ -82,21 +82,35 @@ class AdminController extends Controller
     }
 
     public function chooseCourseSubjectForUser(Request $request){
+        try {
+        DB::beginTransaction();
+
         $traineeId = $request->trainee;
-        $trainerId = $request->trainer;
+        $trainerId = $request->supervisor;
         $courseId  = $request->course;
         $subjectId  = $request->subject;
 
-        dd($traineeId);
-        // dd($trainerId);
-        // dd($courseId);
-        dd($subjectId);
+        foreach ($traineeId as $id) {
+            $trainee = $this->user->find($id);
+            $trainee->subjects()->attach($subjectId,['status' => 1]);
+            $trainee->courses()->attach($courseId,['status' => 1]);
+        }
 
-        // DB::table('course_subject')->insert([
-        //     'subject_id' => $subjectId,
-        //     'course_id' => $courseId,
-        // ]);
+        $trainer = $this->user->find($trainerId);
+        $trainer->subjects()->attach($subjectId,['status' => 0]);
+        $trainer->courses()->attach($courseId,['status' => 0]);
 
-        // DB::
+        $course = $this->course->find($courseId);
+        $course->subjects()->attach($subjectId);
+
+        DB::commit();
+
+        return redirect()->route('chooseforuser');
+      } catch (Exception $e) {
+        DB::rollBack();
+      }
+
+
+
     }
 }

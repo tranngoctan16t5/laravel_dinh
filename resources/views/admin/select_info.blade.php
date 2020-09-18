@@ -14,13 +14,13 @@
     @endforeach
 </select>
 
-<select name="supervisor" multiple="multiple" id="">
+<select name="supervisor"  id="">
     @foreach($supervisors as $super)
     <option value="{{$super->id}}">{{$super->username}}</option>
     @endforeach
 </select>
 
-<select name="course" multiple="multiple" id="">
+<select name="course" id="">
     @foreach($courses as $course)
     <option value="{{$course->id}}">{{$course->name}}</option>
     @endforeach
