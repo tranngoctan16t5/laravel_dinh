@@ -103,7 +103,7 @@ class AdminController extends Controller
                 }
             }
             DB::commit();
-            return redirect()->route('chooseforuser');
+            return redirect()->route('chooseforuser')->with('success','Created successfully!');
         } catch (Exception $e) {
             DB::rollBack();
         }
