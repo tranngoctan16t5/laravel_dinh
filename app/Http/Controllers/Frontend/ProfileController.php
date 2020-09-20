@@ -78,6 +78,10 @@ class ProfileController extends Controller
       }
     }
 
+    public function changePass(){
+        return view('frontend.profile.change_pass');
+    }
+
 
 
 

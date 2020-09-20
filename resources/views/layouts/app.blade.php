@@ -83,6 +83,7 @@
                                 @csrf
                             </form>
                               <a class="dropdown-item"  href="{{route('frontend_profile.index')}}">Profile</a>
+                               <a class="dropdown-item"  href="{{route('frontend_changepass')}}">Change Password</a>
                         </div>
 
                     </li>
