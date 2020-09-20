@@ -11,8 +11,8 @@
       </div>
       <div class="form-group col-md-8 password">
          <label class="label--required" for="user_password_confirmation">Xác nhận mật khẩu mới</label><br>
-         <input autocomplete="new-password" class="form-control underlined" type="password" name="user[password_confirmation]" id="user_password_confirmation">
-         <i class="fa fa-eye icon-eyes"></i>
+         <input id="myInput" autocomplete="new-password" class="form-control underlined" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+         <i id="myInput1" onclick="myFunction();" class="fa fa-eye icon-eyes"></i>
       </div>
       <div class="form-group col-md-8 password">
          <label class="label--required" for="user_current_password">Mật khẩu hiện tại</label>
@@ -24,5 +24,9 @@
          <input type="submit" name="commit" value="Cập nhật mật khẩu" class="btn btn-block btn-primary col-md-3 pull-right" data-disable-with="Cập nhật mật khẩu">
       </div>
    </form>
+
+
 </div>
+
+
 @endsection

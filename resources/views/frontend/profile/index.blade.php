@@ -56,6 +56,12 @@
             <div class="col-md-8">
                {{date('Y/m/d', strtotime($user->birthday))}}
             </div>
+             <div class="col-md-4">
+               <p><strong>Số điện thoại</strong></p>
+            </div>
+            <div class="col-md-8">
+               {{$user->phone}}
+            </div>
             <div class="col-md-4">
                <p><strong>Đại học</strong></p>
             </div>
