@@ -21,10 +21,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('frontends/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('admins/bower_components/font-awesome/css/font-awesome.min.css')}}">
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top py-0">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -59,6 +60,12 @@
                         </li>
                         @endif
                         @else
+                        <li class="nav-item">
+                            <img  src="{{Auth::user()->avatar}}" class="rounded-circle" width="30" height="30" alt="">
+                        </li>
+                        <li class="nav-item">
+                            <p class="nav-link">{{Auth::user()->username}}</p>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
@@ -71,10 +78,13 @@
                                 {{ trans('message.logout') }}
                             </a>
 
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
+                              <a class="dropdown-item"  href="{{route('frontend_profile.index')}}">Profile</a>
                         </div>
+
                     </li>
                     @endguest
                 </ul>

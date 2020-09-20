@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 
@@ -25,8 +25,15 @@ Route::get('/permission-denied','Admin\AdminController@permissionDenied')->name(
 
 Route::get('language/{language}','Admin\LanguageController@index')->name('language.index');
 
+//frontend
+Route::get('courses','Frontend\CourseController@index')->name('frontend_course.index');
+Route::get('profile','Frontend\ProfileController@index')->name('frontend_profile.index');
+Route::patch('profile/{id}','Frontend\ProfileController@editAvatarUser')->name('frontend_avataruser.edit');
+Route::get('profile/{id}','Frontend\ProfileController@formEditUser')->name('frontend_formuser.edit');
+Route::post('profile/{id}','Frontend\ProfileController@updateUser')->name('frontend_updateuser');
+
 //admin
-Route::group(['prefix' => 'admin','middleware' => ['auth']],function(){
+Route::group(['prefix' => 'admin','middleware' => ['auth','admin']],function(){
     // Route::get('/',function(){
     //     return view('admin.index');
     // });
