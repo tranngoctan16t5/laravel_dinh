@@ -28,8 +28,8 @@
 {{--          <input id="myInput" autocomplete="new-password" class="form-control underlined" type="password" name="user[password_confirmation]" id="user_password_confirmation">
          <i id="myInput1" onclick="myFunction();" class="fa fa-eye icon-eyes"></i> --}}
 
-         <input autocomplete="new-password" class="form-control underlined" type="password" name="newpassword_confirmation" id="user_password_confirmation">
-         {{-- <i class="fa fa-eye icon-eyes"></i> --}}
+         <input id="myInput" autocomplete="new-password" class="form-control underlined" type="password" name="newpassword_confirmation" id="user_password_confirmation">
+         <i id="myInput1" onclick="myFunction();" class="fa fa-eye icon-eyes"></i>
          @error('newpassword_confirmation')
                     <div class="text-danger">{{ $errors->first('newpassword_confirmation') }}</div>
           @enderror

@@ -112,7 +112,7 @@
   if(y.className === "fa icon-eyes fa-eye"){
     y.className = "fa icon-eyes fa-eye-slash";
   }else{
-        y.className = "fa icon-eyes fa-eye";
+        y.className = "fa icon-eyes fa-eye-slash";
 
   }
 
