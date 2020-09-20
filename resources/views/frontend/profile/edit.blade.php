@@ -45,13 +45,13 @@
             </div>
          </div>
          <div class="col-md-6">
-            <div class="form-group {{ $errors->first('password') ? 'has-error' : ''}} ">
+           {{--  <div class="form-group {{ $errors->first('password') ? 'has-error' : ''}} ">
                <label class="control-label" for="exampleInputPassword1">Password</label>
                <input type="password" id="inputError" name="password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
                @error('password')
                <div class="text-danger">{{ $errors->first('password') }}</div>
                @enderror
-            </div>
+            </div> --}}
             <div class="form-group {{ $errors->first('university') ? 'has-error' : ''}} ">
                <label class="control-label" for="exampleInputPassword1">University</label>
                <input type="text" name="university" value="{{ $user->university }}" class="form-control" id="exampleInputPassword1" placeholder="university">

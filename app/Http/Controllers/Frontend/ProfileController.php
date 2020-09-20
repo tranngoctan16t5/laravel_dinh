@@ -62,7 +62,6 @@ class ProfileController extends Controller
         $data['address'] = $request->address;
         $data['university'] = $request->university;
         $data['birthday'] = $request->birthday;
-        $data['password'] = Hash::make($request->password);
         $image = $request->file('avatar');
         $old_avatar = $request->old_avatar;
         if ($image) {

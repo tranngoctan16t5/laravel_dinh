@@ -78,7 +78,8 @@
                <p><strong>Ngôn ngữ</strong></p>
             </div>
             <div class="col-md-8">
-               {{$courseOfUser->name}}
+
+               {{$courseOfUser ? $courseOfUser->name : 'Chua dang ki khoa'}}
             </div>
             {{-- <div class="col-md-12 mb-2 p-2 bg-info text-white">
                <h5 class="mb-0">Thông tin công việc</h5>
