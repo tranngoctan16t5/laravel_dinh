@@ -9,6 +9,8 @@ use App\Models\Course;
 use Auth;
 use DB;
 use Hash;
+use App\Http\Requests\ChangePasswordRequest;
+
 
 class ProfileController extends Controller
 {
@@ -78,8 +80,23 @@ class ProfileController extends Controller
       }
     }
 
-    public function changePass(){
+    public function changePassForm(){
         return view('frontend.profile.change_pass');
+    }
+
+    public function changePassStore(ChangePasswordRequest $request){
+        if (!(Hash::check($request->current_password,Auth::user()->password))) {
+            return back()->with('error','Mật khẩu cũ của bạn không đúng');
+        }
+        if ($request->new_password != $request->newpassword_confirmation) {
+            return back()->with('error','Mật khẩu xác nhận không đúng');
+        }
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return back()->with('success','Thay đổi mật khẩu thành công');
+
     }
 
 
