@@ -116,12 +116,7 @@
         y.className = "fa icon-eyes fa-eye-slash";
 
   }
-
-
 }
-
-
-
 </script>
 </body>
 </html>

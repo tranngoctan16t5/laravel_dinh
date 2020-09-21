@@ -494,4 +494,147 @@ label {
     margin-right: -15px;
     margin-left: -15px;
 }
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+#course-info {
+    background-color: #fff;
+    border-radius: 5px;
+}
+#course-info .course-image-info {
+    float: left;
+    width: 20%;
+}
+.p-2 {
+    padding: 0.5rem !important;
+}
+#course-info img {
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+    max-height: 160px;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+#course-info .course-content-info {
+    position: relative;
+    float: left;
+    width: 60%;
+    padding: 10px;
+}
+#course-info ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+#course-info ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.course-info h4 {
+    display: inline-block;
+}
+.word-break {
+    word-break: break-all;
+}
+.font-weight-bold {
+    font-weight: 700 !important;
+}
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+h4, .h4 {
+    font-size: 1.5rem;
+}
+text-danger {
+    color: #dc3545 !important;
+}
+#course-info ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.content-info {
+    background: #fff;
+    border-radius: 5px;
+}
+.mt-3, .my-3 {
+    margin-top: 1rem !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.p-2 {
+    padding: 0.5rem !important;
+}
+.mt-3, .my-3 {
+    margin-top: 1rem !important;
+}
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+}
+.rounded {
+    border-radius: 0.25rem !important;
+}
+.bg-white {
+    background-color: #fff !important;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.course-info .menu-course li a {
+    display: block;
+    padding: 8px;
+    background-color: #76D4F5;
+    color: #fff;
+    text-decoration: none;
+}
+.nav-link.active {
+    border-color: transparent !important;
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+.subject-image {
+    float: left;
+    width: 15%;
+    padding-right: 10px;
+}
+.subject-info {
+    float: left;
+    width: 52%;
+}
+.subject_actions {
+    float: left;
+    width: 31%;
+    padding-top: 3%;
+}
+#list-subject .subject-item:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+#list-subject .subject-item {
+    border-radius: 1.25rem;
+    background-color: #f0f3f6;
+    transition: box-shadow 220ms ease-in-out;
+}
 

@@ -61,4 +61,8 @@ class CourseController extends Controller
         // // dd($courseOfUser);
          return view('frontend.course.index',compact('courseOfUser'));
 }
+  public function showCourse($id){
+    // $users = DB::table('users');
+    return view('frontend.course.show');
+  }
 }
