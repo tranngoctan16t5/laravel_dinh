@@ -115,7 +115,7 @@ class AdminController extends Controller
     }
 
     public function reportShow($id){
-        $tasks = DB::table('tasks')->where('tasks.user_id','=',$id)->get();
-        return $task;
+        $tasks = $this->user->find($id)->tasks;
+        return view('admin.showreport',compact('tasks'));
     }
 }
