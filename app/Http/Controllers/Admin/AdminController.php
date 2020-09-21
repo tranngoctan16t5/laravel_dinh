@@ -108,4 +108,14 @@ class AdminController extends Controller
             DB::rollBack();
         }
     }
+
+    public function reportForm(){
+        $trainees = DB::table('users')->join('role_user','users.id','=','user_id')->where('role_user.role_id','=',1)->get();
+        return view('admin.report',compact('trainees'));
+    }
+
+    public function reportShow($id){
+        $tasks = DB::table('tasks')->where('tasks.user_id','=',$id)->get();
+        return $task;
+    }
 }
