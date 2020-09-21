@@ -69,6 +69,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth','admin']],function(){
     Route::get('chooseforuser','Admin\AdminController@formSubmitCourseOfUser')->name('chooseforuser');
     Route::post('submitcourse','Admin\AdminController@chooseCourseSubjectForUser')->name('submitofuser');
 
+    Route::get('report','Admin\AdminController@reportForm')->name('report.index');
+    Route::get('report/{id}','Admin\AdminController@reportShow')->name('report.show');
+
 
 
 });
