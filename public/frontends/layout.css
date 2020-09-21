@@ -376,4 +376,122 @@ h1, h2, h3, h4, h5, h6 {
 .process__list ul {
     list-style: none;
 }
+.card {
+    background-color: #fff;
+    box-shadow: 5px 5px 5px rgba(126,142,159,0.1);
+    margin-bottom: 10px;
+    border-radius: 0;
+    border: none;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 0.25rem;
+}
+.card.card-info>.card-header {
+    background-color: #76D4F5;
+}
+.card .card-header {
+    background-image: none;
+    background-color: #ffffff;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    border-radius: 0;
+    min-height: 50px;
+    border: none;
+}
+.card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+@media (min-width: 1200px)
+.card .card-header .header-block {
+    padding: 0.5rem 20px;
+}
+.card .card-header .header-block {
+    padding: 0.5rem 15px;
+}
+.card .card-header .title {
+    color: #4f5f6f;
+    display: inline-flex;
+}
+p {
+    line-height: 1.3125rem;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+@media (min-width: 1200px)
+.card-block {
+    padding: 20px;
+}
+.card-block {
+    padding: 15px;
+}
+.mod-course {
+    padding: 12px 0;
+}
+@media (min-width: 1200px)
+.container {
+    max-width: 1140px;
+}
+@media (min-width: 992px)
+.container {
+    max-width: 960px;
+}
+@media (min-width: 768px)
+.container {
+    max-width: 720px;
+}
+@media (min-width: 576px)
+.container {
+    max-width: 540px;
+}
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+input, textarea {
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: #595959;
+}
+input, textarea {
+    outline: none;
+}
+button, input {
+    overflow: visible;
+}
+
+label, .control-label {
+    font-weight: 600;
+}
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+.form-group .row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
 
