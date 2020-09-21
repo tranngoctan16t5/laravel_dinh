@@ -39,13 +39,13 @@
                </a>
             </li>
             <li id="sidebar-member">
-               <a href="">
+               <a href="{{route('reports.index')}}">
                <i class="fa fa-bar-chart"></i>
                Lịch sử báo cáo
                </a>
             </li>
             <li id="sidebar-member">
-               <a href="">
+               <a href="{{route('reports.create')}}">
                <i class="fa fa-calendar-o"></i>
                Báo cáo hằng ngày
                </a>
