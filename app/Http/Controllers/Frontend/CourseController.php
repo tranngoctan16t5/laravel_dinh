@@ -62,7 +62,10 @@ class CourseController extends Controller
          return view('frontend.course.index',compact('courseOfUser'));
 }
   public function showCourse($id){
-    // $users = DB::table('users');
+    // $users = $this->course->find($id)->users;
+
+    $users = DB::table('users')->join('course_user','users.id','=','course_user.user_id')->join('role_user','users.id','=','role_user.user_id')->where('role_user.role_id','=','1')->distinct()->pluck('username');
+    dd($users);
     return view('frontend.course.show');
   }
 }
