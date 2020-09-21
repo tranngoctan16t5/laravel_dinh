@@ -22,50 +22,16 @@ class CourseController extends Controller
     }
     public function index(){
         $userId=Auth::user()->id;
-        $courseOfUser = DB::table('courses')->join('course_user','courses.id','course_id')->where('user_id','=',$userId)->get();
-        // $courseId = $courseOfUser[0]->course_id;
+        $courseOfUser = DB::table('courses')->join('course_user','courses.id','course_id')->where('user_id','=',$userId)->orderBy('courses.id', 'desc')->first();
+        $id = $courseOfUser->id;
+        $trainer = DB::table('users')->select('username','users.id')->join('course_user','users.id','=','course_user.user_id')->join('role_user','users.id','=','role_user.user_id')->where('role_user.role_id','=','2')->where('course_user.course_id','=',$id)->distinct()->first();
 
-        // $data = DB::table('course_user')->where('coure_id','=',$courseId)->join('user')->where('user.id','user_id')->get();
-
-  //       $courseOfUserDetail = $this->course->find($courseOfUser[0]->course_id);
-  //       $superOfCourse = $courseOfUserDetail->users()->pluck('username');
-  // //
-  //
-  //
-//Danh sách supervisor
-        // $supervisors = DB::table('users')->join('role_user','users.id','=','user_id')->pluck('username');
-        //     dd($superOfCourse);
-
-
-  //       $data = array();
-  //       $result = array();
-  //       foreach ($supervisors as $value) {
-  //          $data = $value;
-  //      }
-
-  //      foreach ($superOfCourse as $key) {
-  //         if($superOfCourse->contains($data)){
-  //             $result = $data;
-  //         }
-  // }
-  // dd($result);
-
-
-
-
-
-        // $nameSupperOfCourse = DB::table('courses')->join('course_user','courses.id','course_id')->join('users')
-        // ->where('users.id','=','user_id')->get();
-        // dd($nameSupperOfCourse );
-        // $supperOfCourse =
-        // // dd($courseOfUser);
-         return view('frontend.course.index',compact('courseOfUser'));
+         return view('frontend.course.index',compact('courseOfUser','trainer'));
 }
   public function showCourse($id){
     // $users = $this->course->find($id)->users;
 
     $users = DB::table('users')->select('username','users.id')->join('course_user','users.id','=','course_user.user_id')->join('role_user','users.id','=','role_user.user_id')->where('role_user.role_id','=','1')->where('course_user.course_id','=',$id)->distinct()->get();
-
     return view('frontend.course.show',compact('users'));
   }
 }
