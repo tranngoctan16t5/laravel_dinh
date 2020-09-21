@@ -5,7 +5,7 @@
       <div class="img">
          <div class="image_edit">
             <button type="button" class="btn btn-secondary edit_image" data-toggle="modal"
-             data-target="#exampleModal" data-whatever="@mdo"> <i class="fa fa-edit" aria-hidden="true"></i> </button>
+               data-target="#exampleModal" data-whatever="@mdo"> <i class="fa fa-edit" aria-hidden="true"></i> </button>
          </div>
          <img class="profile_image" src="{{asset($user->avatar)}}">
       </div>
@@ -56,7 +56,7 @@
             <div class="col-md-8">
                {{date('Y/m/d', strtotime($user->birthday))}}
             </div>
-             <div class="col-md-4">
+            <div class="col-md-4">
                <p><strong>Số điện thoại</strong></p>
             </div>
             <div class="col-md-8">
@@ -84,10 +84,10 @@
                <p><strong>Ngôn ngữ</strong></p>
             </div>
             <div class="col-md-8">
-
                {{$courseOfUser ? $courseOfUser->name : 'Chua dang ki khoa'}}
             </div>
-            {{-- <div class="col-md-12 mb-2 p-2 bg-info text-white">
+            {{--
+            <div class="col-md-12 mb-2 p-2 bg-info text-white">
                <h5 class="mb-0">Thông tin công việc</h5>
             </div>
             <div class="col-md-4">
@@ -143,7 +143,8 @@
             </div>
             <div class="col-md-8">
                Inprogress
-            </div> --}}
+            </div>
+            --}}
          </div>
       </div>
       <div id="progress" class="tab-pane fade p-2">
@@ -155,18 +156,6 @@
                <div class="process__list">
                   <div class="bg-light p-2 mb-2 process__item">
                      <div class="process__item-head">
-                        <div class="p-2 process__item-img">
-                           <img src="/assets/default-course-edb1df5c743f99e3b93d19e2f2db5204f217817ec7867fdf4990134f04aa6690.png">
-                        </div>
-                        <div class="p-2 process__item-infor">
-                           <h5 class="text-uppercase font-weight-bold word-break">
-                              <span class="badge badge-warning">inprogress</span>
-                              <span class="text-muted">[ĐN-OE36 + Practice5] PHP</span>
-                           </h5>
-                           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample26" aria-expanded="true" aria-controls="collapseExample">
-                           Thông tin môn học
-                           </button>
-                        </div>
                      </div>
                      <div>
                         <div class="collapse show" id="collapseExample26" style="">
@@ -425,30 +414,30 @@
       </div>
    </div>
 </div>
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" role="document">
+   <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"> File hình ảnh </h5>
-        </div>
-          <form class="edit_user" id="edit_user_140" enctype="multipart/form-data"
-           action="{{route('frontend_avataruser.edit',Auth::user()->id)}}" accept-charset="UTF-8" data-remote="true" method="post">
-           @csrf
-           @method('patch')
-
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> File hình ảnh </h5>
+         </div>
+         <form class="edit_user" id="edit_user_140" enctype="multipart/form-data"
+            action="{{route('frontend_avataruser.edit',Auth::user()->id)}}" accept-charset="UTF-8" data-remote="true" method="post">
+            @csrf
+            @method('patch')
             <div class="modal-body">
-              <div class="form-group">
-                <input required="required" type="file" name="avatar" id="user_avatar">
-                 <input type="hidden" name="old_avatar" value="{{$user->avatar}}">
-              </div>
+               <div class="form-group">
+                  <input required="required" type="file" name="avatar" id="user_avatar">
+                  <input type="hidden" name="old_avatar" value="{{$user->avatar}}">
+               </div>
             </div>
             <div class="message"></div>
             <div class="modal-footer">
-              <input type="submit" name="commit" value="Cập nhật hình ảnh" class="btn btn-primary closemodal" data-disable-with="Cập nhật hình ảnh">
-              <button type="button" class="btn btn-secondary btn-close-modal" data-dismiss="modal"> Đóng </button>
+               <input type="submit" name="commit" value="Cập nhật hình ảnh" class="btn btn-primary closemodal" data-disable-with="Cập nhật hình ảnh">
+               <button type="button" class="btn btn-secondary btn-close-modal" data-dismiss="modal"> Đóng </button>
             </div>
-</form>      </div>
-    </div>
-  </div>
+         </form>
+      </div>
+   </div>
+</div>
+</div>
 @endsection

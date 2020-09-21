@@ -9,7 +9,7 @@
         <div class="card-block">
           <div class="card-title-block">
             <i class="fa fa-calendar-o"></i>
-            <span class="title"> 08-10-2020 </span>
+            <span class="title">{{ date('Y/m/d', strtotime($task->created_at))}}</span>
           </div>
           <section class="example">
             <div class="table-responsive">
@@ -35,7 +35,7 @@
                     <td>
                       <p>{{$task->done}}</p>
                     </td>
-                    <td>{{$task->created_at}}</td>
+                    <td>{{date('H:m:i', strtotime($task->created_at))}}</td>
                     <td>
                       <div class="quick-view">
                         <a data-toggle="modal" data-target="#modal233">
@@ -43,134 +43,54 @@
                           <i class="fa fa-eye"></i>
                           </button>
                         </a>
-                        <a href="/vi/reports/233/edit">
+                        <a href="{{route('reports.edit',$task->id)}}">
                           <button class="btn btn-oval btn-success btn-circle btn-sm">
                           <i class="fa fa-edit"></i>
                           </button>
-                        </a>            <button class="btn btn-oval btn-danger btn-circle btn-sm report-delete-single" id="233">
-                        <i class="fa fa-trash"></i>
+                        </a>
+                        <button data-toggle="modal" data-target="#myModal" type="submit" class="btn btn-oval btn-danger btn-circle btn-sm report-delete-single "  id="233">
+                        {{--  <a href="{{route('reports.destroy',$task->id)}}" class=" btn btn-oval btn-danger btn-circle btn-sm report-delete-single delete-confirm"> --}}
+                          <i class="fa fa-trash"></i>
+                        {{--  </a> --}}
                         </button>
                       </div>
-                      <!-- Modal -->
-                      <div id="modal233" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">×</button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="card card-info">
-                                <div class="card-header">
-                                  <div class="header-block report-header-block">
-                                    <strong class="title">
-                                    BÁO CÁO
-                                    </strong>
-                                    <div class="btn-group dropleft report-button">
-                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <a class="item-actions-toggle-btn">
-                                        <span class="inactive">
-                                          <i class="fa fa-cog"></i>
-                                        </span>
-                                      </a>
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="/vi/reports/233/edit">
-                                          <i class="fa fa-pencil"></i>
-                                          <span>Cập nhật báo cáo</span>
-                                        </a>
-                                        <button class="dropdown-item report-delete-single show" id="233">
-                                        <i class="fa fa-trash"></i>
-                                        <span>Xóa báo cáo</span>
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="card-block">
-                                  <section class="mod-course">
-                                    <div class="container">
-                                      <table class="table table-borderless report-detail">
-                                        <tbody>
-                                          <tr>
-                                            <td class="report-info">
-                                              Viết bởi:
-                                            </td>
-                                            <td>
-                                              [DN-OE36-PHP]Tran Ngoc Tan (W)
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td class="report-info">
-                                              Vào lúc:
-                                            </td>
-                                            <td>
-                                              08-10-2020
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td class="report-info">
-                                              Khóa học:
-                                            </td>
-                                            <td>
-                                              [ĐN-OE36 + Practice5] PHP
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                      <div class="col">
-                                        <a class="btn btn-secondary report-content-btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          Việc đã làm:
-                                        </a>
-                                        <div class="collapse show" id="collapseExample">
-                                          <div class="card card-body">
-                                            <p>Học Git theo tài liệu của trainer </p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col">
-                                        <a class="btn btn-secondary report-content-btn" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          Khó khăn:
-                                        </a>
-                                        <div class="collapse show" id="collapseExample1">
-                                          <div class="card card-body">
-                                            <p>khó khăn với những câu lệnh git mới </p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col">
-                                        <a class="btn btn-secondary report-content-btn" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          Dự kiến:
-                                        </a>
-                                        <div class="collapse show" id="collapseExample2">
-                                          <div class="card card-body">
-                                            <p>tiếp tục học git và làm bài test</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </section>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">
-                              <span class="translation_missing" title="translation missing: vi.close">Close</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
+
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
   </div>
-  @endforeach
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <form  method="post" action="{{route('reports.destroy',$task->id)}}">
+          @csrf
+          @method('DELETE')
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger" >xoá</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 </div>
 @endsection
