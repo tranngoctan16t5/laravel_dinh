@@ -28,9 +28,9 @@ Route::get('language/{language}','Admin\LanguageController@index')->name('langua
 //frontend
 Route::group(['middleware'=> ['auth']],function(){
     Route::get('courses','Frontend\CourseController@index')->name('frontend_course.index');
-    Route::get('profile','Frontend\ProfileController@index')->name('frontend_profile.index');
+    Route::get('profile/{id}','Frontend\ProfileController@index')->name('frontend_profile.index');
     Route::patch('profile/{id}','Frontend\ProfileController@editAvatarUser')->name('frontend_avataruser.edit');
-    Route::get('profile/{id}','Frontend\ProfileController@formEditUser')->name('frontend_formuser.edit');
+    Route::get('profile/{id}/edit','Frontend\ProfileController@formEditUser')->name('frontend_formuser.edit');
     Route::post('profile/{id}','Frontend\ProfileController@updateUser')->name('frontend_updateuser');
     Route::get('changepassword','Frontend\ProfileController@changePassForm')->name('frontend_changepass');
     Route::post('changepassword','Frontend\ProfileController@changePassStore')->name('frontend_changepassstore');

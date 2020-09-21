@@ -76,7 +76,8 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = $this->task->find($id);
+        return view('frontend.report.edit',compact('task'));
     }
 
     /**
@@ -88,7 +89,11 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data =array();
+        $data = $request->all();
+        $this->task->find($id)->update($data);
+        return redirect()->route('reports.index');
     }
 
     /**
@@ -99,6 +104,7 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->task->find($id)->delete();
+        return redirect()->back();
     }
 }

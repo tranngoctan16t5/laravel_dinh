@@ -21,9 +21,8 @@ class ProfileController extends Controller
         $this->user = $user;
         $this->course = $course;
     }
-    public function index(){
-        $userId = Auth::user()->id;
-        $user = $this->user->find($userId);
+    public function index($id){
+        $user = $this->user->find($id);
         $courseOfUser = $user->courses()->where('status','=',1)->orderBy('id','desc')->first();
         return view('frontend.profile.index',compact('user','courseOfUser'));
     }
