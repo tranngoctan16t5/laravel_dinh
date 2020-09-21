@@ -169,9 +169,11 @@
                               </tr>
                            </thead>
                            <tbody id="list_trainee">
+                            @foreach($users as $user)
                               <tr id="trainee_62">
-                                 <td><a href="/vi/users/141">[DN_OE36_PHP] Nguyen Thi Hong Yen</a></td>
+                                 <td><a href="{{route('frontend_profile.index',$user->id)}}">{{$user->username}}</a></td>
                               </tr>
+                              @endforeach
                               <!-- Modal -->
                            </tbody>
                         </table>

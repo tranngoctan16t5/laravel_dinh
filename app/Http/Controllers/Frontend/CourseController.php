@@ -64,8 +64,8 @@ class CourseController extends Controller
   public function showCourse($id){
     // $users = $this->course->find($id)->users;
 
-    $users = DB::table('users')->join('course_user','users.id','=','course_user.user_id')->join('role_user','users.id','=','role_user.user_id')->where('role_user.role_id','=','1')->distinct()->pluck('username');
-    dd($users);
-    return view('frontend.course.show');
+    $users = DB::table('users')->select('username','users.id')->join('course_user','users.id','=','course_user.user_id')->join('role_user','users.id','=','role_user.user_id')->where('role_user.role_id','=','1')->where('course_user.course_id','=',$id)->distinct()->get();
+
+    return view('frontend.course.show',compact('users'));
   }
 }
