@@ -23,6 +23,8 @@
          <link rel="stylesheet" href="{{asset('admins/dist/css/skins/_all-skins.min.css')}}">
          <!-- Pace style -->
          <link rel="stylesheet" href="{{asset('admins/plugins/pace/pace.min.css')}}">
+         <link rel="stylesheet" href="{{asset('admins/custom_css/style.css')}}">
+
 
          <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
          <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -262,7 +264,12 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{ route('chooseforuser')}}">
-               <i class="fa fa-table"></i> <span>Function 4 select</span>
+               <i class="fa fa-table"></i> <span> Course Register</span>
+            </a>
+         </li>
+           <li class="nav-item">
+            <a class="nav-link" href="{{ route('report.index')}}">
+               <i class="fa fa-table"></i> <span> View Trainee Report</span>
             </a>
          </li>
          <!-- user -->

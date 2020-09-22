@@ -49,7 +49,6 @@ class AdminController extends Controller
             $image = $request->file('avatar');
             $old_avatar = $request->old_avatar;
             if ($image) {
-                unlink($old_avatar);
                 $image_name = date('dmy_H_s_i');
                 $ext = strtolower($image->getClientOriginalExtension());
                 $image_full_name = $image_name . '.' . $ext;
@@ -96,6 +95,9 @@ class AdminController extends Controller
                     $trainer->subjects()->attach($subId,['status' => 0]);
                 }
             }
+             if (!$trainer->courses->contains($courseId)) {
+                    $trainer->courses()->attach($courseId,['status' => 1]);
+                }
             $course = $this->course->find($courseId);
             foreach ($subjectId as $subId) {
                 if (!$course->subjects->contains($subId)) {

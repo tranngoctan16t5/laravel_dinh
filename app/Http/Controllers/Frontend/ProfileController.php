@@ -35,12 +35,11 @@ class ProfileController extends Controller
             $old_avatar = $request->old_avatar;
 
             if($image){
-                unlink($old_avatar);
                 $data['avatar'] =  uploadImage($image);
             }
             $user = $this->user->where('id',$id)->update($data);
             DB::commit();
-            return redirect()->route('frontend_profile.index');
+            return redirect()->route('frontend_profile.index',$id);
 
         }catch (Exception $e){
             return redirect()->back();
@@ -66,14 +65,13 @@ class ProfileController extends Controller
         $image = $request->file('avatar');
         $old_avatar = $request->old_avatar;
         if ($image) {
-            unlink($old_avatar);
             $data['avatar'] =  uploadImage($image);
 
         }
         $this->user->where('id',$id)->update($data);
         DB::commit();
 
-        return redirect()->route('frontend_profile.index');
+        return redirect()->route('frontend_profile.index',$id);
       } catch (Exception $e) {
         DB::rollBack();
       }

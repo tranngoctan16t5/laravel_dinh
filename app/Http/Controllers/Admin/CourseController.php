@@ -116,7 +116,6 @@ class CourseController extends Controller
         $image = $request->file('image');
         $old_avatar = $request->old_avatar;
         if ($image) {
-            unlink($old_avatar);
             $data['image'] =  uploadImage($image);
         }
         $course = $this->course->where('id',$id)->update($data);

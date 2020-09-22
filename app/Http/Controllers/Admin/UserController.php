@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\EditUserRequest;
 use Hash;
 use DB;
 use Carbon\Carbon;
@@ -78,7 +79,7 @@ class UserController extends Controller
         $user->roles()->attach($request->role);
         DB::commit();
 
-        return redirect()->route('users.index')->with('success', 'User created');
+        return redirect()->route('users.index')->with('success', 'Created Successfully !!');
       } catch (Exception $e) {
         DB::rollBack();
       }
@@ -120,7 +121,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
         try {
         DB::beginTransaction();
@@ -136,7 +137,6 @@ class UserController extends Controller
         $image = $request->file('avatar');
         $old_avatar = $request->old_avatar;
         if ($image) {
-            unlink($old_avatar);
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
@@ -150,7 +150,7 @@ class UserController extends Controller
         $user->roles()->sync($request->role);
         DB::commit();
 
-        return redirect()->route('users.index')->with('success', 'User edited');
+        return redirect()->route('users.index')->with('success', 'Edit Successfully !!');
       } catch (Exception $e) {
         DB::rollBack();
       }

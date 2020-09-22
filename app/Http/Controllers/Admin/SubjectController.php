@@ -106,7 +106,6 @@ class SubjectController extends Controller
         $image = $request->file('image');
         $old_image = $request->old_image;
         if ($image) {
-            unlink($old_image);
             $image_name = date('dmy_H_s_i');
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;

@@ -1,9 +1,17 @@
 @extends('layouts.app_master_admin')
 @section('content')
-<h1>List Courses</h1>
-    <a href="{{ route('courses.create')}}" type="button" class="btn btn-md btn-info">Add Course <i class="fa fa-plus"></i></a>
-    <div class="box-body table-responsive no-padding">
-         @if (session('success'))
+   <div class="box-header">
+      <h1 class="box-title">List Course</h1>
+      <div class="box-tools">
+         <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+            <div class="input-group-btn">
+               <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+         </div>
+      </div>
+   </div>
+ @if (session('success'))
          <div class="alert alert-success">
             {{ session('success') }}
          </div>
@@ -13,6 +21,9 @@
             {{ session('error') }}
          </div>
       @endif
+    <a href="{{ route('courses.create')}}" type="button" class="btn btn-md btn-info">Add Course <i class="fa fa-plus"></i></a>
+    <div class="box-body table-responsive no-padding">
+
         <table class="table table-hover table-striped table-bordered">
             <tbody>
                 <tr>

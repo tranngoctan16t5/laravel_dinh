@@ -3,24 +3,24 @@
 <section class="course-info">
    <div id="course-info" class="clearfix">
       <div class="course-image-info p-2">
-         <img src="/assets/default-course-edb1df5c743f99e3b93d19e2f2db5204f217817ec7867fdf4990134f04aa6690.png">
+         <img src="{{asset($courseOfUser->image)}}">
       </div>
       <div class="course-content-info">
          <ul>
             <li>
                <h4 class="text-uppercase font-weight-bold word-break">
                   <span class="badge badge-warning">Đang mở</span>
-                  <a class="text-decoration-none text-muted" href="/vi/courses/26">[ĐN-OE36 + Practice5] PHP</a>
+                  <a class="text-decoration-none text-muted" href="/vi/courses/26">{{$courseOfUser->name}}</a>
                </h4>
             </li>
             <li class="mb-1">
                <i class="fa fa-clock"></i>
                <span>
-               <strong> 10-08-2020 </strong>
+               <strong> {{date('Y-m-d',strtotime($courseOfUser->start_day))}} </strong>
                </span>
                <i class="fa fa-long-arrow-right"></i>
                <span class="text-danger">
-               <strong> 05-10-2020 </strong>
+               <strong> {{date('Y-m-d',strtotime($courseOfUser->end_day))}} </strong>
                </span>
                ( dự kiến )
             </li>
@@ -28,13 +28,13 @@
                <p class="mb-1">
                   <i class="fa fa-user"></i>
                   Được tạo bởi
-                  <strong> Tran Duc Quoc </strong>
+                  <strong> {{$superOfCourse ? $superOfCourse->username : ''}} </strong>
                </p>
             </li>
             <li>
                <i class="fa fa-refresh"></i>
                Lần cuối cập nhật là: <strong>
-               10-08-2020 11:14:05 AM </strong>
+               {{$courseSubject->updated_at}}</strong>
             </li>
          </ul>
       </div>
@@ -61,75 +61,40 @@
       <div class="tab-content float-none">
          <div id="subject" class="tab-pane active">
             <div id="list-subject">
+              @foreach($subjects as $subject)
                <div class="row">
-                  <div class="col-auto text-center flex-column d-none d-sm-flex">
-                     <div class="row h-50">
-                        <div class="col ">&nbsp;</div>
-                        <div class="col"></div>
-                     </div>
-                     <div class="subject-status">Finished</div>
-                     <div>
-                        <span class="badge badge-pill badge-status badge badge-pill bg-success"><i class="fa fa-check"></i></span>
-                     </div>
-                     <div class="row h-50">
-                        <div class="col
-                           border-right
-                           ">&nbsp;</div>
-                        <div class="col"></div>
-                     </div>
-                  </div>
                   <div class="col py-2">
                      <div class="card border-success subject-item">
                         <div class="card-body">
                            <div class="subject-image">
                               <a href="/vi/courses/26/course_subject_users/343">
-                              <img src="/assets/default-course-edb1df5c743f99e3b93d19e2f2db5204f217817ec7867fdf4990134f04aa6690.png">
+                              <img height="100p" width="100" src="{{asset($subject->image)}}">
                               </a>
                            </div>
                            <div class="subject-info">
-                              <div class="text-success">
+                            {{--   <div class="text-success">
                                  <button class="btn btn-sm btn-warning text-white">
                                  <i class="fa fa-clock"></i>
                                  10-08-2020 <i class="fa fa-long-arrow-right"></i> 11-08-2020
                                  </button>
-                              </div>
+                              </div> --}}
                               <h5 class="card-title text-success">
-                                 <a href="/vi/courses/26/course_subject_users/343">Git</a>
-                                 <small>
+                                 <a href="#">{{$subject->name}}</a>
+                                {{--  <small>
                                  Thời gian: 2 ngày
-                                 </small>
+                                 </small> --}}
                               </h5>
-                              <p class="card-text">Hướng dẫn học git xem tại đây
-                                 https://github.com/framgia/Training-Guideline/blob/master/Git/git_tutorial.md
+                               <small>
+                                 Mô tả :
+                                 </small>
+                              <p class="card-text">{{$subject->description}}
                               </p>
-                              <button class="btn btn-sm btn-secondary" type="button" data-target="#course1_details" data-toggle="collapse" aria-expanded="true">
-                              Xem Nhanh Nhiệm Vụ
-                              <i class="fa fa-caret-down"></i>
-                              </button>
-                              <div class="border collapse" id="course1_details">
-                                 <ul class="p-2 text-monospace row">
-                                    <div class="col-md-1">
-                                       <i class="fa fa-check v_subject"></i>
-                                    </div>
-                                    <li class="col-md-11  ">Git Basic </li>
-                                    <div class="col-md-1">
-                                       <i class="fa fa-check v_subject"></i>
-                                    </div>
-                                    <li class="col-md-11  ">Git Follow SUN</li>
-                                    <div class="col-md-1">
-                                       <i class="fa fa-check v_subject"></i>
-                                    </div>
-                                    <li class="col-md-11  ">Pass Git exam</li>
-                                 </ul>
-                              </div>
-                           </div>
-                           <div class="subject_actions">
-                              <a class="btn btn-success-outline w-100" href="/vi/courses/26/course_subject_users/343"><i class="fa fa-bolt">Hoàn thành nhưng quá hạn</i></a>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
+               @endforeach
 
             </div>
          </div>
@@ -141,14 +106,14 @@
                   <h5 class="my-3" id="trainer-count">Danh sách giảng viên (1)</h5>
                   <div class="list-trainers">
                      <div id="list-trainer" class="d-inline-block">
-                        <div class="user-avatar -medium -initial" style="background-image: url('/assets/default-course-edb1df5c743f99e3b93d19e2f2db5204f217817ec7867fdf4990134f04aa6690.png')" data-toggle="tooltip" data-title="Tran Duc Quoc" data-original-title="" title=""></div>
+                        <div class="user-avatar -medium -initial" style="background-image: url('{{asset($superOfCourse ? $superOfCourse->avatar : '')}}')" data-toggle="tooltip" data-title="{{$superOfCourse->username}}" data-original-title="" title=""></div>
                      </div>
                   </div>
                </div>
                <div class="col-md-12">
                   <div class="d-flex justify-content-between mt-3">
                      <h5 id="trainee-count">
-                        Danh sách học viên (4)
+                        Danh sách học viên ({{$userCount}})
                      </h5>
                   </div>
                   <div class="card dashboard-table-advanced">
