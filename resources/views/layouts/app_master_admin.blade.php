@@ -3,7 +3,7 @@
 <head>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>AdminLTE 2 | Pace Page</title>
+   <title>System STS</title>
    <!-- Tell the browser to be responsive to screen width -->
    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
    <!-- Bootstrap 3.3.7 -->
@@ -154,15 +154,14 @@
             <li class="dropdown user user-menu">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{ asset(Auth::user()->avatar)}}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">{{Auth::user()->username}}</span>
                </a>
                <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                      <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                      <p>
-                        Alexander Pierce - Web Developer
-                        <small>Member since Nov. 2012</small>
+                        {{Auth::user()->username}}
                      </p>
                   </li>
                   <!-- Menu Body -->
@@ -210,10 +209,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
          <div class="pull-left image">
-            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            <img src="{{asset(Auth::user()->avatar)}}" class="img-circle" alt="User Image">
          </div>
          <div class="pull-left info">
-            <p>Alexander Pierce</p>
+            <p>{{Auth::user()->username}}</p>
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
          </div>
       </div>
@@ -234,42 +233,42 @@
          <!-- user -->
          <li class="nav-item">
             <a class="nav-link" href="{{ route('users.index') }}">
-               <i class="fa fa-table"></i> <span>User</span>
+               <i class="fa fa-table"></i> <span>{{trans('message.main.user')}}</span>
             </a>
          </li>
 
          <li class="nav-item">
             <a class="nav-link" href="{{ route('courses.index') }}">
-               <i class="fa fa-table"></i> <span>Courses</span>
+               <i class="fa fa-table"></i> <span>{{trans('message.main.course')}}</span>
             </a>
          </li>
 
          <li class="nav-item">
             <a class="nav-link" href="{{ route('subject.index') }}">
-               <i class="fa fa-table"></i> <span>Subject</span>
+               <i class="fa fa-table"></i> <span>{{trans('message.main.subject')}}</span>
             </a>
          </li>
 
            <li class="nav-item">
             <a class="nav-link" href="{{ route('trainer.index') }}">
-               <i class="fa fa-table"></i> <span>View all Trainee</span>
+               <i class="fa fa-table"></i> <span>{{trans('message.main.viewalltrainee')}} </span>
             </a>
          </li>
 
          <li class="nav-item">
             <a class="nav-link" href="{{ route('supervisor.index')}}">
-               <i class="fa fa-table"></i> <span>View all supervisor</span>
+               <i class="fa fa-table"></i> <span>{{trans('message.main.viewalltrainer')}}</span>
             </a>
          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="{{ route('chooseforuser')}}">
-               <i class="fa fa-table"></i> <span> Course Register</span>
+               <i class="fa fa-table"></i> <span>{{trans('message.main.registercourse')}} </span>
             </a>
          </li>
            <li class="nav-item">
             <a class="nav-link" href="{{ route('report.index')}}">
-               <i class="fa fa-table"></i> <span> View Trainee Report</span>
+               <i class="fa fa-table"></i> <span>{{trans('message.main.viewreport')}} </span>
             </a>
          </li>
          <!-- user -->

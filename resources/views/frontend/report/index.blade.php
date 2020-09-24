@@ -1,7 +1,7 @@
 @extends('home')
 @section('noidung')
 <div class="container">
-  <h1>Báo Cáo Hằng Ngày</h1>
+  <h1>{{trans('message.report.reportday')}}</h1>
   @foreach($tasks as $task)
   <div class="row">
     <div class="col-md-12">
@@ -17,10 +17,10 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Khó Khăn</th>
-                    <th>Việc đã làm</th>
-                    <th>Vào Lúc</th>
-                    <th>Nội dung</th>
+                    <th>{{trans('message.report.block')}}</th>
+                    <th>{{trans('message.report.done')}}</th>
+                    <th>{{trans('message.report.at')}}</th>
+                    <th>{{trans('message.report.contain')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -72,12 +72,12 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title">Confirm Delete</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <!-- Modal body -->
       <div class="modal-body">
-        Modal body..
+        Report now !!
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">

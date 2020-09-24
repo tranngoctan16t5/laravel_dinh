@@ -17,7 +17,7 @@
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Title</h3>
+            <h3 class="box-title">WElCOME ADMIN PAGE</h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                 title="Collapse">
@@ -26,7 +26,7 @@
                 <i class="fa fa-times"></i></button>
             </div>
         </div>
-        <div class="box-body">
+       {{--  <div class="box-body">
             Pace loading works automatically on page. You can still implement it with ajax requests by adding this js:
             <br/><code>$(document).ajaxStart(function() { Pace.restart(); });</code>
             <br/>
@@ -39,7 +39,7 @@
             </div>
             <div class="ajax-content">
             </div>
-        </div>
+        </div> --}}
         <!-- /.box-body -->
         <div class="box-footer">
             Footer

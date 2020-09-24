@@ -26,8 +26,8 @@
    <div class="sidebar-container">
       <div class="sidebar-header">
          <div class="brand">
-            <img alt="Sun" width="80" src="">
-            <span>Education</span>
+            <img alt="Sun" width="80" src="{{asset('public/media/220920_01_07_03.png')}}">
+            <span>System STS</span>
          </div>
       </div>
       <nav class="menu">
@@ -35,19 +35,19 @@
             <li id="sidebar-member">
                <a href="{{route('frontend_course.index')}}">
                <i class="fa fa-list-alt"></i>
-               Khóa học của tôi
+               {{trans('message.home.mycourse')}}
                </a>
             </li>
             <li id="sidebar-member">
                <a href="{{route('reports.index')}}">
                <i class="fa fa-bar-chart"></i>
-               Lịch sử báo cáo
+                {{trans('message.home.historyreport')}}
                </a>
             </li>
             <li id="sidebar-member">
                <a href="{{route('reports.create')}}">
                <i class="fa fa-calendar-o"></i>
-               Báo cáo hằng ngày
+               {{trans('message.home.reportday')}}
                </a>
             </li>
          </ul>
@@ -59,7 +59,7 @@
 </div>
 <footer class="footer">
   <div class="footer-block buttons">
-     2019 Ⓒ <strong>Sun Asterisk</strong>. All rights reserved.
+     2020 Ⓒ <strong>System STS</strong>. All rights reserved.
  </div>
  <div class="footer-block author">
     Version: <strong>2.0.0</strong>

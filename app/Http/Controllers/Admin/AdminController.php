@@ -117,7 +117,13 @@ class AdminController extends Controller
     }
 
     public function reportShow($id){
-        $tasks = $this->user->find($id)->tasks;
-        return view('admin.showreport',compact('tasks'));
+        try {
+            $tasks = $this->user->findOrFail($id)->tasks;
+            return view('admin.showreport',compact('tasks'));
+        }
+        catch (Exception $e) {
+            return redirect()->back();
+        }
+
     }
 }

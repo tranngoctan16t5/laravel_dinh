@@ -43,6 +43,40 @@ return [
         'addsuccess' => 'Thêm mới khóa học thành công',
         'editsuccess' => 'Chỉnh sửa khóa học thành công',
     ],
+    'user' => [
+        'listuser' => 'Danh sách người dùng',
+        'adduser' => 'Thêm ngươì dùng',
+        'username' => 'Tên người dùng',
+        'address' => 'Địa chỉ',
+        'gender' => 'Giới tính',
+        'phone' => 'Số điện thoại',
+        'action' => 'Tác vụ',
+        'email' => 'Email',
+        'edit' => 'Chỉnh sửa',
+        'detail' => 'Chi tiết',
+        'delete' => 'Xoá',
+    ],
+       'main' => [
+        'user' => 'Người dùng',
+        'course' => 'Khoá học',
+        'subject' => 'Môn học',
+        'viewalltrainee' => 'Xem tất cả thực tập sinh',
+        'viewalltrainer' => 'Xem tất cả người quản lý',
+        'viewreport' => 'Xem báo cáo',
+        'registercourse' => 'Đăng ký khoá',
+    ],
+     'report' => [
+        'done' => 'Đã hoàn thành',
+        'block' => 'Khó khăn hôm nay',
+        'at' => 'Vào lúc',
+        'contain' => 'Nội dung',
+        'reportday' => 'Báo cáo ngày',
+    ],
+      'home' => [
+        'mycourse' => 'Khoá học của tôi',
+        'historyreport' => 'Lịch sử báo cáo',
+        'reportday' => 'Báo cáo ngày',
+    ],
 
 
 ];
